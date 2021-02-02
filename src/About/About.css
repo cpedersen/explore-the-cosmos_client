@@ -1,0 +1,11 @@
+nav {
+    background: #D3D3D3;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-about {
+    margin-top: 30%;
+    margin-left: 20%;
+    margin-right: 20%;
+}

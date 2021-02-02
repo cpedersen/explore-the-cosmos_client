@@ -1,0 +1,33 @@
+.container-navbar-description {
+background: #D3D3D3;
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+justify-content: space-between;
+}
+
+.container-description {
+background-color: F8F8F8;
+}
+
+.item-description {
+text-align: left;
+vertical-align: center;
+margin-left: 20%;
+margin-right: 20%;
+margin-top: 20%;
+margin-bottom: 25%;
+}
+
+.header-description {
+font-size: 120%;
+text-decoration: underline;
+}
+
+.container-footer-results {
+background: #D3D3D3;
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+justify-content: space-between;
+}

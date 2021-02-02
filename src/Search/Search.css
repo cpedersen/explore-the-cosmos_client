@@ -1,0 +1,25 @@
+body {
+  background-color: #C0C0C0;
+}
+
+nav {
+  background: #D3D3D3;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-search {
+  /*height: 100%;*/
+}
+
+.search-criteria {
+  background-color: F8F8F8;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+  margin-bottom: 20%;
+}
+
+.search-criteria-form {
+
+}
