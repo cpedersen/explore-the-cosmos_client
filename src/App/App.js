@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Homepage from '../Homepage/Homepage';
-import Search from '../Search/Search';
-import Results from '../Results/Results';
-import Description from '../Description/Description';
-import About from '../About/About';
-import Navbar from '../Navbar/Navbar';
-import Countdown from '../Countdown/Countdown';
+import Homepage from '../views/Homepage/Homepage';
+import Search from '../views/Search/Search';
+import Results from '../views/Results/Results';
+import Description from '../views/Description/Description';
+import About from '../views/About/About';
 import {Route} from 'react-router-dom';
 
 class App extends Component {
@@ -18,8 +16,8 @@ class App extends Component {
         <Route exact path="/results" component={Results}></Route>
         <Route exact path="/description" component={Description}></Route>
         <Route exact path="/about" component={About}></Route>
-        <Route exact path="/navbar" component={Navbar}></Route>
-        <Route exact path="/countdown" component={Countdown}></Route>
+        {/*<Route exact path="/navbar" component={Navbar}></Route>
+        <Route exact path="/countdown" component={Countdown}></Route>*/}
       </main>
     );
   }

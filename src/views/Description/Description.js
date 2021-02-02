@@ -5,13 +5,13 @@ class Description extends Component {
   render() {
     return (
       <div className='container-description'>
-        <nav class="container-navbar-description">
+        <nav className="container-navbar-description">
             <a href="#"></a>
             <a href="#">Go back to search results...</a> 
             <a href="#"></a>
         </nav>
-        <div class="item-description">
-            <div class="header-description">
+        <div className="item-description">
+            <div className="header-description">
             Description Information:
             </div>
             <ul>
@@ -26,7 +26,7 @@ class Description extends Component {
             <li>Description</li>
             </ul>
         </div>
-        <nav class="container-footer-results">
+        <nav className="container-footer-results">
             <a href="#"></a>
             <a href="#"></a>
             <a href="#">Next</a> 
