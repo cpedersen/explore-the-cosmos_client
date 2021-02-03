@@ -6,6 +6,7 @@ nav {
   background: #D3D3D3;
   display: flex;
   justify-content: space-between;
+  
 }
 
 .container-search {
@@ -14,8 +15,8 @@ nav {
 
 .search-criteria {
   background-color: F8F8F8;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 20%;
   margin-bottom: 20%;
 }

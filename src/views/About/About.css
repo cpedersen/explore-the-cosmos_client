@@ -5,7 +5,9 @@ nav {
 }
 
 .container-about {
-    margin-top: 30%;
-    margin-left: 20%;
-    margin-right: 20%;
+
+}
+
+.about-text {
+    margin: 10%;
 }

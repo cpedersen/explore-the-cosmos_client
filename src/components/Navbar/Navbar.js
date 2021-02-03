@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import './Navbar.css';
+import {Link} from 'react-router-dom';
 
 class Navbar extends Component {
   render() {
     return (
-        <nav className="container-navbar">
-            <a href="#">Home</a>
-            <a href="#">Search</a> 
-            <a href="#">About</a> 
+      <div className="container-navbar">
+        <nav className="navbar">
+          <Link to="/" target="_blank" className="home-link">Home</Link>
+          <Link to="/search" target="_blank" className="search-link">Search</Link> 
+          <Link to="/about" target="_blank" className="about-link">About</Link> 
         </nav>
+      </div>
     );
   }
 }

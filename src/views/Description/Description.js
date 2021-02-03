@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './Description.css';
+import {Link} from 'react-router-dom'
 
 class Description extends Component {
   render() {
     return (
       <div className='container-description'>
-        <nav className="container-navbar-description">
-            <a href="#"></a>
-            <a href="#">Go back to search results...</a> 
-            <a href="#"></a>
+        <nav className="navbar">
+          <Link to="/" className="no-link"></Link>
+          <Link to="/results" target="_blank" className="search-link">Go back to search results...</Link> 
+          <Link to="/" className="no-link"></Link> 
         </nav>
         <div className="item-description">
             <div className="header-description">
