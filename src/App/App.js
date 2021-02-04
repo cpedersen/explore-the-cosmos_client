@@ -12,15 +12,35 @@ import {Route, Switch} from 'react-router-dom';
 class App extends Component {
 
   state = {
+    query: '',
     searchResults: [],
     total_hits: 0
   };
 
+  onSearchResults = ({results, total_hits}) => {
+    this.setState({
+      searchResults: results,
+      total_hits
+    })
+  }
+
+  onQueryChange = e => {
+    const {value} = e.target
+    this.setState({
+      query: value
+    })
+  }
+
   render() {
+    const {query, searchResults, total_hits} = this.state
+    const {onSearchResults, onQueryChange} = this
 
     const contextValue = {
-      searchResults: this.state.searchResults,
-      total_hits: this.state.total_hits
+      query,
+      searchResults,
+      total_hits,
+      onSearchResults,
+      onQueryChange
     }
 
     return (
@@ -41,7 +61,7 @@ class App extends Component {
                   component={Results}
               />
               <Route
-                  exact path='/description'
+                  exact path='/description/:nasa_id'
                   component={Description}
               />
               <Route

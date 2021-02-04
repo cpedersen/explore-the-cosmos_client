@@ -62,5 +62,9 @@ background-color: #DDDDDD;
 .footer-results {
 flex-shrink: 0;
 }
-  
-  
+
+.item-result-image {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
