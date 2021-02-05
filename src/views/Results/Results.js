@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./Results.css";
 import { Link } from "react-router-dom";
-import SearchContext from "../../SearchContext";
+//import SearchContext from "../../SearchContext";
 
 class Results extends Component {
-  state = {
+  /*state = {
     show_prev_link: false,
     show_next_link: false,
-  };
+  };*/
 
   render() {
     return (

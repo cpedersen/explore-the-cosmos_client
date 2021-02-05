@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SearchContext from "../../SearchContext";
 import config from "../../config";
+//import { config } from "../../config";
 import Results from "../Results/Results";
 import "./Search.css";
 
@@ -16,7 +17,6 @@ class Search extends Component {
     end_date: END_DATE,
     error: null,
     loading: false,
-    total_pages: 0,
     page: 1,
     limitReached: false,
   };
@@ -73,7 +73,7 @@ class Search extends Component {
   };
 
   onQueryChange = (e) => {
-    const query = e.target.value;
+    //const query = e.target.value;
     if (this.state.page > 1) {
       this.setState({ page: 1 });
     }
@@ -180,14 +180,19 @@ class Search extends Component {
               items={this.context.searchResults}
               total_hits={this.context.total_hits}
             />
-            <nav className="footer-results">
+            {/*<nav className="footer-results">
               <a href="#" onClick={this.onPrevPage}>
                 Prev
               </a>
-              <span href="#">{this.state.page}</span>
+              <span>{this.state.page}</span>
               <a href="#" onClick={this.onNextPage}>
                 Next
               </a>
+            </nav>*/}
+            <nav className="footer-results">
+              <button onClick={this.onPrevPage}>Prev</button>
+              <span>{this.state.page}</span>
+              <button onClick={this.onNextPage}>Next</button>
             </nav>
           </>
         ) : null}

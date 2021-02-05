@@ -54,7 +54,7 @@ class Description extends Component {
       center,
       description,
       date_created,
-      title,
+      //title,
       nasa_id,
       image,
     } = this.state.data;
@@ -81,11 +81,11 @@ class Description extends Component {
             <li>Description: {description}</li>
           </ul>
         </div>
-        <nav className="container-footer-results">
+        {/*<nav className="container-footer-results">
           <a href="#"></a>
           <a href="#"></a>
           <a href="#">Next</a>
-        </nav>
+        </nav>*/}
       </div>
     );
   }
