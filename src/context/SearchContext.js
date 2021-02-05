@@ -1,11 +1,11 @@
+import React from "react";
 
+const SearchContext = React.createContext({
+  query: null,
+  total_hits: 0,
+  loading: false,
+  //show_prev_link: false,
+  //show_next_link: false,
+});
 
-const SearchContextProvider = props => {
-    return (
-        <SearchContext.Provider value={{}}>
-            {props.children}
-        </SearchContext.Provider>
-    )
-}
-
-export default SearchContextProvider
+export default SearchContext;

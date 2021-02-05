@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import SearchContext from "../../SearchContext";
+import SearchContext from "../../context/SearchContext";
 import config from "../../config";
-//import { config } from "../../config";
 import Results from "../Results/Results";
 import "./Search.css";
 
