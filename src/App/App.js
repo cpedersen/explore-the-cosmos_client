@@ -7,7 +7,6 @@ import Search from "../views/Search/Search";
 import Results from "../views/Results/Results";
 import Description from "../views/Description/Description";
 import About from "../views/About/About";
-import GlobalSpinnerContext from "../context/GlobalSpinnerContext";
 
 class App extends Component {
   state = {

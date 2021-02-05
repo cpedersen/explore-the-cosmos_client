@@ -4,7 +4,6 @@ import SearchContext from "../../context/SearchContext";
 import config from "../../config";
 import Results from "../Results/Results";
 import "./Search.css";
-import { v4 as uuidv4 } from "uuid";
 import GlobalSpinner from "../../components/GlobalSpinner/GlobalSpinner";
 import GlobalSpinnerContext from "../../context/GlobalSpinnerContext";
 
@@ -135,11 +134,11 @@ class Search extends Component {
   };
 
   //Count the number of pages to display (denominator = results/page)
-  getPagesCount = (total, denominator) => {
+  /*getPagesCount = (total, denominator) => {
     const divisible = total % denominator === 0;
     const valueToBeAdded = divisible ? 0 : 1;
     return Math.floor(total / denominator) + valueToBeAdded;
-  };
+  };*/
 
   resetForm = (e) => {
     e.preventDefault();
