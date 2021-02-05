@@ -4,6 +4,9 @@ import SearchContext from "../../context/SearchContext";
 import config from "../../config";
 import Results from "../Results/Results";
 import "./Search.css";
+import { v4 as uuidv4 } from "uuid";
+import GlobalSpinner from "../../components/GlobalSpinner/GlobalSpinner";
+import GlobalSpinnerContext from "../../context/GlobalSpinnerContext";
 
 const START_DATE = 1920;
 const END_DATE = new Date().getFullYear();
@@ -20,6 +23,35 @@ class Search extends Component {
     limitReached: false,
   };
 
+  componentDidMount() {
+    console.log("mounted", this.props);
+    const url = new URLSearchParams(this.props.location.search);
+    console.log("urls?", ...url.keys());
+    const q = url.get("q") || "";
+    const page = parseInt(url.get("page")) || 1;
+    const start_date = parseInt(url.get("year_start")) || START_DATE;
+    const end_date = parseInt(url.get("year_end")) || END_DATE;
+    this.context.onQueryChange(q);
+    if (
+      start_date === START_DATE &&
+      end_date === END_DATE &&
+      page == 1 &&
+      q == ""
+    )
+      return;
+
+    this.setState(
+      {
+        page,
+        start_date,
+        end_date,
+      },
+      () => {
+        this.initSearch(page);
+      }
+    );
+  }
+
   updateFormState = (e) => {
     const { name, value } = e.target;
     this.setState({
@@ -32,11 +64,16 @@ class Search extends Component {
     this.initSearch(this.state.page);
   };
 
-  initSearch = (page) => {
+  initSearch = async (page) => {
     //console.log("NASA_URL " + `${config.API_ENDPOINT}`);
     //console.log("query:", this.state.query);
-    const SEARCH_URL = `${config.API_ENDPOINT}?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&page=${page}`;
+    const urlParams = `?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&page=${page}`;
+    const SEARCH_URL = `${config.API_ENDPOINT}${urlParams}`;
     //console.log("SEARCH URL: " + SEARCH_URL);
+    this.props.history.push(`${this.props.match.path}${urlParams}`);
+    this.setState({
+      loading: true,
+    });
 
     //Fetching the search data
     fetch(SEARCH_URL, {
@@ -58,6 +95,8 @@ class Search extends Component {
         this.context.onSearchResults({
           results: result.collection.items,
           total_hits: result.collection.metadata.total_hits,
+        });
+        this.setState({
           loading: false,
         });
         //console.log("total_hits: " + result.collection.metadata.total_hits);
@@ -76,7 +115,7 @@ class Search extends Component {
     if (this.state.page > 1) {
       this.setState({ page: 1 });
     }
-    this.context.onQueryChange(e);
+    this.context.onQueryChange(e.target.value);
   };
 
   onNextPage = (e) => {
@@ -102,8 +141,20 @@ class Search extends Component {
     return Math.floor(total / denominator) + valueToBeAdded;
   };
 
+  resetForm = (e) => {
+    e.preventDefault();
+    this.setState({
+      page: 1,
+      start_date: START_DATE,
+      end_date: END_DATE,
+    });
+    this.context.onQueryChange("");
+    this.context.setResults([]);
+    this.props.history.push("/search");
+  };
+
   render() {
-    console.log("in search", this);
+    console.log("this in search", this);
     return (
       <div className="container-search">
         <nav className="navbar">
@@ -170,7 +221,12 @@ class Search extends Component {
             />
             <label htmlFor="end_date">End date ({this.state.end_date})</label>
             <br></br>
-            <input type="submit" value="Submit" />
+            <input
+              type="submit"
+              value={this.state.loading ? "Submitting" : "Submit"}
+              disabled={this.state.loading}
+            />
+            <button onClick={this.resetForm}>Reset</button>
           </form>
         </div>
         {this.context.searchResults.length ? (
@@ -179,15 +235,6 @@ class Search extends Component {
               items={this.context.searchResults}
               total_hits={this.context.total_hits}
             />
-            {/*<nav className="footer-results">
-              <a href="#" onClick={this.onPrevPage}>
-                Prev
-              </a>
-              <span>{this.state.page}</span>
-              <a href="#" onClick={this.onNextPage}>
-                Next
-              </a>
-            </nav>*/}
             <nav className="footer-results">
               <button onClick={this.onPrevPage}>Prev</button>
               <span>{this.state.page}</span>

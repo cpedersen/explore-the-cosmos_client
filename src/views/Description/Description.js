@@ -18,7 +18,9 @@ class Description extends Component {
       error: null,
     });
 
-    //Fetching the search data
+    //TODO - Add loading support here
+
+    //Fetching the item search data
     fetch(SEARCH_URL, {
       method: "GET",
       headers: {
@@ -29,7 +31,7 @@ class Description extends Component {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("result", result);
+        console.log("result: ", result);
         const item = {
           ...result.collection.items[0].data[0],
           image: result.collection.items[0].links[0].href,
@@ -40,7 +42,7 @@ class Description extends Component {
         });
       })
       .catch((error) => {
-        console.error("error?", error);
+        console.error("error: ", error);
         this.setState({
           loading: false,
           error: true,
@@ -49,7 +51,7 @@ class Description extends Component {
   }
 
   render() {
-    console.log("in description", this);
+    //console.log("this in description", this);
     const {
       center,
       description,
@@ -62,9 +64,12 @@ class Description extends Component {
       <div className="container-description">
         <nav className="navbar">
           <Link to="/" className="no-link"></Link>
-          <Link to="/results" target="_blank" className="search-link">
+          <a
+            onClick={() => this.props.history.goBack()}
+            className="search-link"
+          >
             Go back to search results...
-          </Link>
+          </a>
           <Link to="/" className="no-link"></Link>
         </nav>
         <div className="item-description">

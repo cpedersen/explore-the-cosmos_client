@@ -10,6 +10,7 @@ class Results extends Component {
   };*/
 
   render() {
+    //console.log("this in results", this);
     return (
       <div className="container-results">
         <div className="all-results">

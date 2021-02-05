@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import SearchContext from "../context/SearchContext";
 import Homepage from "../views/Homepage/Homepage";
@@ -6,7 +7,7 @@ import Search from "../views/Search/Search";
 import Results from "../views/Results/Results";
 import Description from "../views/Description/Description";
 import About from "../views/About/About";
-import { Route, Switch } from "react-router-dom";
+import GlobalSpinnerContext from "../context/GlobalSpinnerContext";
 
 class App extends Component {
   state = {
@@ -22,16 +23,23 @@ class App extends Component {
     });
   };
 
-  onQueryChange = (e) => {
-    const { value } = e.target;
+  setResults = (value) => {
+    this.setState({
+      searchResults: value,
+    });
+  };
+
+  onQueryChange = (value) => {
     this.setState({
       query: value,
     });
   };
 
   render() {
+    //console.log("this in app", this);
+
     const { query, searchResults, total_hits } = this.state;
-    const { onSearchResults, onQueryChange } = this;
+    const { onSearchResults, onQueryChange, setResults } = this;
 
     const contextValue = {
       query,
@@ -39,6 +47,7 @@ class App extends Component {
       total_hits,
       onSearchResults,
       onQueryChange,
+      setResults,
     };
 
     return (
