@@ -4,8 +4,8 @@ import SearchContext from "../../context/SearchContext";
 import config from "../../config";
 import Results from "../Results/Results";
 import "./Search.css";
-import GlobalSpinner from "../../components/GlobalSpinner/GlobalSpinner";
-import GlobalSpinnerContext from "../../context/GlobalSpinnerContext";
+//import GlobalSpinner from "../../components/GlobalSpinner/GlobalSpinner";
+//import GlobalSpinnerContext from "../../context/GlobalSpinnerContext";
 
 const START_DATE = 1920;
 const END_DATE = new Date().getFullYear();
@@ -34,8 +34,8 @@ class Search extends Component {
     if (
       start_date === START_DATE &&
       end_date === END_DATE &&
-      page == 1 &&
-      q == ""
+      page === 1 &&
+      q === ""
     )
       return;
 

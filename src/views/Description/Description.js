@@ -64,12 +64,12 @@ class Description extends Component {
       <div className="container-description">
         <nav className="navbar">
           <Link to="/" className="no-link"></Link>
-          <a
+          <button
             onClick={() => this.props.history.goBack()}
             className="search-link"
           >
             Go back to search results...
-          </a>
+          </button>
           <Link to="/" className="no-link"></Link>
         </nav>
         <div className="item-description">
