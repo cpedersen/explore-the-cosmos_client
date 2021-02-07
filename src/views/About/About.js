@@ -7,10 +7,10 @@ class About extends Component {
     return (
       <div className="container-about">
         <nav className="navbar">
-          <Link to="/" target="_blank" className="home-link">
+          <Link to="/" className="home-link">
             Home
           </Link>
-          <Link to="/search" target="_blank" className="search-link">
+          <Link to="/search" className="search-link">
             Search
           </Link>
           <Link to="" className="no-link"></Link>
@@ -23,7 +23,7 @@ class About extends Component {
           <p>Then describe NASA.</p>
           <p>
             Next describe NASA's public repository of images, which was provided
-            to excite the public more about astronomy.
+            to excite the public about astronomy.
           </p>
           <p>Explain that 100 images are displayed per page.</p>
         </div>

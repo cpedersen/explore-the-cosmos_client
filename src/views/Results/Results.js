@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import "./Results.css";
 import { Link } from "react-router-dom";
-//import SearchContext from "../../SearchContext";
 
 class Results extends Component {
-  /*state = {
-    show_prev_link: false,
-    show_next_link: false,
-  };*/
-
   render() {
-    //console.log("this in results", this);
+    //console.log("this in results: ", this);
     return (
       <div className="container-results">
         <div className="all-results">

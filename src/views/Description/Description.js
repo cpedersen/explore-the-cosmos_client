@@ -18,9 +18,7 @@ class Description extends Component {
       error: null,
     });
 
-    //TODO - Add loading support here
-
-    //Fetching the item search data
+    //Fetch the item search data
     fetch(SEARCH_URL, {
       method: "GET",
       headers: {
@@ -51,12 +49,11 @@ class Description extends Component {
   }
 
   render() {
-    //console.log("this in description", this);
+    //console.log("this in description: ", this);
     const {
       center,
       description,
       date_created,
-      //title,
       nasa_id,
       image,
     } = this.state.data;
@@ -86,11 +83,6 @@ class Description extends Component {
             <li>Description: {description}</li>
           </ul>
         </div>
-        {/*<nav className="container-footer-results">
-          <a href="#"></a>
-          <a href="#"></a>
-          <a href="#">Next</a>
-        </nav>*/}
       </div>
     );
   }
