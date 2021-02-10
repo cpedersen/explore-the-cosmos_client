@@ -3,16 +3,21 @@ import "./Results.css";
 import { Link } from "react-router-dom";
 
 class Results extends Component {
+  onTagClick = (e, keyword) => {
+    e.preventDefault();
+    this.props.onTagClick(keyword);
+  };
   render() {
     //console.log("this in results: ", this);
+    const { total_hits, items } = this.props;
     return (
       <div className="container-results">
         <div className="all-results">
           <div className="results-count">
-            <p>{this.props.total_hits} Results Found...</p>
+            <p>{total_hits} Results Found...</p>
           </div>
-          {this.props.items.map((item) => {
-            const { title, nasa_id, keywords } = item.data[0];
+          {items.map((item) => {
+            const { title, nasa_id, keywords, tags } = item.data[0];
             return (
               <div className="item-result" key={nasa_id}>
                 <div className="item">{title}</div>
@@ -30,9 +35,33 @@ class Results extends Component {
                     <div>
                       NASA Keywords:{" "}
                       {keywords?.map((keyword, index) => {
-                        return <span key={index}>{keyword} </span>;
+                        return (
+                          <a
+                            onClick={(e) => this.onTagClick(e, keyword)}
+                            key={index}
+                          >
+                            <span>{keyword} </span>
+                          </a>
+                        );
                       })}
                     </div>
+                    {tags ? (
+                      <div>
+                        Vision tags:
+                        {tags.map(({ score, description }) => {
+                          return (
+                            <a
+                              onClick={(e) => this.onTagClick(e, description)}
+                              key={description}
+                            >
+                              <p>
+                                {description}: {(score * 100).toFixed(2)}%
+                              </p>
+                            </a>
+                          );
+                        })}
+                      </div>
+                    ) : null}
                   </div>
                   <div className="tags-google">Google Tags: TBD</div>
                 </div>
