@@ -7,14 +7,17 @@ import Search from "../views/Search/Search";
 import Results from "../views/Results/Results";
 import Description from "../views/Description/Description";
 import About from "../views/About/About";
+import RandomQuote from "../views/RandomQuote/RandomQuote";
 
 class App extends Component {
   state = {
     query: "",
     searchResults: [],
     total_hits: 0,
+    quote: "",
   };
 
+  // TODO: why isn't total_hits set to something?
   onSearchResults = ({ results, total_hits }) => {
     this.setState({
       searchResults: results,
@@ -37,7 +40,7 @@ class App extends Component {
   render() {
     //console.log("this in app", this);
 
-    const { query, searchResults, total_hits } = this.state;
+    const { query, searchResults, total_hits, quote } = this.state;
     const { onSearchResults, onQueryChange, setResults } = this;
 
     const contextValue = {
@@ -47,6 +50,7 @@ class App extends Component {
       onSearchResults,
       onQueryChange,
       setResults,
+      quote,
     };
 
     return (
@@ -57,6 +61,7 @@ class App extends Component {
               <Route exact path="/" component={Homepage} />
               <Route exact path="/search" component={Search} />
               <Route exact path="/results" component={Results} />
+              <Route exact path="/quote" component={RandomQuote} />
               <Route
                 exact
                 path="/description/:nasa_id"

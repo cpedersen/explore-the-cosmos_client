@@ -11,6 +11,10 @@ const END_DATE = new Date().getFullYear();
 class Search extends Component {
   static contextType = SearchContext;
 
+  // start_date & end_date: start year and end year
+  // loading: true (still waiting on NASA search return), else false
+  // limitReached: number of items on the page (max: 100)
+  // keywords: NASA keyword search support
   state = {
     start_date: START_DATE,
     end_date: END_DATE,
@@ -22,16 +26,17 @@ class Search extends Component {
   };
 
   componentDidMount() {
-    //Print out the props
+    // Print out the props
     console.log("mounted: ", this.props);
 
-    //Construct the url using this.props.location
+    // Construct the url using this.props.location (location contains
+    // information about the query params)
     const url = new URLSearchParams(this.props.location.search);
-    console.log("urls?", ...url.keys());
 
-    //Get the query that the user inputted; if no query found, then
-    //pass an empty string
-    const q = url.get("q") || "";
+    // Get the query that the user inputted; if no query found, then
+    // pass an empty string
+    const query = url.get("q") || "";
+
     const keywordsText = url.get("keywords") || "";
     console.log("keywords text", keywordsText);
     const keywords = keywordsText.length
@@ -43,39 +48,40 @@ class Search extends Component {
 
     console.log("keywords", keywords);
 
-    //Find the page from the url; if nothing found, page is 1 by
-    //default, according to API
+    // Find the page from the url; if nothing found, page is 1 by
+    // default, according to API
     const page = parseInt(url.get("page")) || 1;
 
-    //Find the start_date from the url; if nothing found, then it's
-    //always the default; ditto for end_date
+    // Find the start_date from the url; if nothing found, then it's
+    // always the default; ditto for end_date
     const start_date = parseInt(url.get("year_start")) || START_DATE;
     const end_date = parseInt(url.get("year_end")) || END_DATE;
 
-    //Pass the query to the onQueryChange function defined in App
-    this.context.onQueryChange(q);
+    // Pass the query to the onQueryChange function defined in App
+    this.context.onQueryChange(query);
 
-    //Check if we're using default settings to begin with (no
-    //user input); if we are, then continue; otherwise exit this
-    //function
     if (
+      // Check if we're using default settings to begin with (no
+      // user input)
       start_date === START_DATE &&
       end_date === END_DATE &&
       page === 1 &&
-      q === ""
+      query === ""
     ) {
+      // exit this function if default settings found
       console.log("Default search settings found");
       return;
     } else {
+      // if we are using non-default settings, then continue
       console.log("User-provided search settings found");
     }
 
-    //Default settings found, so we need to 1) pass to state an object
-    //containing the state we need to update (page, start_date, end_date,
-    //keywords) and 2) pass to state a callback function that will
-    //initialize search parameters needed for pagination and for clearing
-    //the date settings; the callback function initSearch is executed once
-    //setState is completed and the component is re-rendered
+    // Default settings found, so we need to 1) pass to state an object
+    // containing the state we need to update (page, start_date, end_date,
+    // keywords) and 2) pass to state a callback function that will
+    // initialize search parameters needed for pagination and for clearing
+    // the date settings; the callback function initSearch is executed once
+    // setState is completed and the component is re-rendered
     this.setState(
       {
         page,
@@ -89,8 +95,8 @@ class Search extends Component {
     );
   }
 
-  //Get user-inputted values
   updateFormState = (e) => {
+    // Update state using value inputted by the user (name is key)
     const { name, value } = e.target;
     this.setState({
       [name]: value,
@@ -98,14 +104,21 @@ class Search extends Component {
   };
 
   onTagClick = (tag) => {
-    // Is the tag in keywords
+    // Is the tag in keywords?
     // If it is, set it to the opposite value
     // Otherwise, set it to true
     const tagLower = tag.toLowerCase();
     let nextTagValue = true;
+
+    // Don't allow the user to add the same tag twice to the list of
+    // keywords used in the query
+    // If user keeps selecting the same tag, then add or remove it from
+    // the query (nextTagValue = true/false)
     if (Reflect.has(this.state.keywords, tagLower)) {
       nextTagValue = !this.state.keywords[tagLower];
+      console.log("nextTagValue inside Reflect: ", nextTagValue);
     }
+    console.log("nextTagValue: ", nextTagValue);
 
     const keywords = {
       ...this.state.keywords,
@@ -123,9 +136,10 @@ class Search extends Component {
     );
   };
 
-  //Keep the page visible with preventDefault after a search;
-  //Store the url search parameters after user has inputted search
   onSubmitSearchForm = (e) => {
+    //Keep the page visible with preventDefault after a search;
+    //Store the url search parameters after user has inputted
+    //their search
     e.preventDefault();
     this.initSearch(this.state.page);
   };
@@ -163,7 +177,7 @@ class Search extends Component {
       });
 
       const result = await response.json();
-      console.log("RESULT NASA", result);
+      console.log("NASA results: ", result);
       if (result.collection.items.length < 100) {
         this.setState({
           limitReached: true,
@@ -173,7 +187,7 @@ class Search extends Component {
       const itemsToTag = result.collection.items
         .slice(0, 5)
         .map((item) => item.links?.[0].href);
-      console.log("items to tag", itemsToTag);
+      console.log("items to tag: ", itemsToTag);
       const taggedResponse = await fetch(
         "http://localhost:8000/api/vision/tag-images",
         {
@@ -394,9 +408,18 @@ class Search extends Component {
               onTagClick={this.onTagClick}
             />
             <nav className="footer-results">
-              <button onClick={this.onPrevPage}>Prev</button>
+              {this.state.page !== 1 ? (
+                <button onClick={this.onPrevPage}>Prev</button>
+              ) : (
+                <span></span>
+              )}
               <span>{this.state.page}</span>
-              <button onClick={this.onNextPage}>Next</button>
+
+              {!this.state.limitReached ? (
+                <button onClick={this.onNextPage}>Next</button>
+              ) : (
+                <span></span>
+              )}
             </nav>
           </>
         ) : null}

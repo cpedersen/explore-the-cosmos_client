@@ -12,6 +12,7 @@ class Results extends Component {
     const { total_hits, items } = this.props;
     return (
       <div className="container-results">
+        <div className="results-quote"></div>
         <div className="all-results">
           <div className="results-count">
             <p>{total_hits} Results Found...</p>
@@ -33,37 +34,39 @@ class Results extends Component {
                 <div className="all-tags">
                   <div className="tags-nasa">
                     <div>
-                      NASA Keywords:{" "}
+                      <b>NASA keywords: </b>
                       {keywords?.map((keyword, index) => {
                         return (
-                          <a
-                            onClick={(e) => this.onTagClick(e, keyword)}
-                            key={index}
-                          >
-                            <span>{keyword} </span>
-                          </a>
+                          <button className="single-nasa-tag">
+                            <a
+                              onClick={(e) => this.onTagClick(e, keyword)}
+                              key={index}
+                            >
+                              <span>{keyword} </span>
+                            </a>
+                          </button>
                         );
                       })}
                     </div>
                     {tags ? (
                       <div>
-                        Vision tags:
+                        <b>Google Vision tags:</b>
                         {tags.map(({ score, description }) => {
                           return (
-                            <a
-                              onClick={(e) => this.onTagClick(e, description)}
-                              key={description}
-                            >
-                              <p>
+                            <button className="single-vision-tag">
+                              <a
+                                onClick={(e) => this.onTagClick(e, description)}
+                                key={description}
+                              >
                                 {description}: {(score * 100).toFixed(2)}%
-                              </p>
-                            </a>
+                              </a>
+                            </button>
                           );
                         })}
                       </div>
                     ) : null}
                   </div>
-                  <div className="tags-google">Google Tags: TBD</div>
+                  {/*<div className="tags-google">Google Vision tags: TBD</div>*/}
                 </div>
                 <div>
                   <br></br>

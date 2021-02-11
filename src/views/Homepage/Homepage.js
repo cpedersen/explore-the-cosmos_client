@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Homepage.css";
+import RandomQuote from "../RandomQuote/RandomQuote";
 
 class Homepage extends Component {
   render() {
@@ -14,14 +15,7 @@ class Homepage extends Component {
           </Link>
         </nav>
         <div className="intro">
-          <div className="intro-quote">
-            "Exploration is in our nature. We began as wanderers, and we are
-            wanderers still. We have lingered long enough on the shores of the
-            cosmic ocean. We are ready at last to set sail for the stars.”
-            <p>
-              <em>- Carl Sagan</em>
-            </p>
-          </div>
+          <RandomQuote />
           <div className="intro-description">
             <p>
               Trace the origins of our knowledge and the scientific method.

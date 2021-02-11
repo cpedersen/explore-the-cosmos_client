@@ -1,16 +1,14 @@
 body {
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
 }
 
 nav {
-  background: #D3D3D3;
+  background: #d3d3d3;
   display: flex;
   justify-content: space-between;
-  
 }
 
 .container-search {
-  /*height: 100%;*/
 }
 
 .search-criteria {
@@ -22,5 +20,4 @@ nav {
 }
 
 .search-criteria-form {
-
 }
