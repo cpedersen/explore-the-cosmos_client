@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Search.css";
 
 const Keywords = (props) => {
   const { keywords, removeKeyword } = props;
@@ -21,12 +22,14 @@ const Keywords = (props) => {
 
   return (
     <div>
-      <span>Keywords</span>
+      <span className="keywords-section">Keywords:</span>
       <br />
       {activeKeywords.map((keyword) => {
         return (
           <div>
-            <span key={keyword}>{keyword}</span>
+            <span className="tag" key={keyword}>
+              {keyword}
+            </span>
             <span>
               <button onClick={(e) => removeKeyword(e, keyword)}>X</button>
             </span>

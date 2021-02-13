@@ -49,3 +49,19 @@ button:hover,
   background-position: center;
   background-repeat: no-repeat;*/
 }
+
+.keywords-section {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.tag {
+  border: 1px solid black;
+  border-radius: 2%;
+  padding: 1%;
+  background: #a9a9a9;
+  display: inline-block;
+  text-align: center;
+  margin: 0em;
+  font: 400 13.3333px Arial;
+}
