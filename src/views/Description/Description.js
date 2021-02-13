@@ -11,7 +11,7 @@ class Description extends Component {
   };
 
   componentDidMount() {
-    const SEARCH_URL = `${config.API_ENDPOINT}?nasa_id=${this.props.match.params.nasa_id}`;
+    const SEARCH_URL = `${config.NASA_API_ENDPOINT}?nasa_id=${this.props.match.params.nasa_id}`;
     console.log("SEARCH URL: " + SEARCH_URL);
     this.setState({
       loading: true,
@@ -23,7 +23,7 @@ class Description extends Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${config.API_KEY}`,
+        Authorization: `Bearer ${config.NASA_API_KEY}`,
       },
       type: "cors",
     })
@@ -61,10 +61,7 @@ class Description extends Component {
       <div className="container-description">
         <nav className="navbar">
           <Link to="/" className="no-link"></Link>
-          <button
-            onClick={() => this.props.history.goBack()}
-            className="search-link"
-          >
+          <button onClick={() => this.props.history.goBack()} className="link">
             Go back to search results...
           </button>
           <Link to="/" className="no-link"></Link>

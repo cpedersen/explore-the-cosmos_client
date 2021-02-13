@@ -8,16 +8,44 @@ nav {
   justify-content: space-between;
 }
 
+.error-text {
+  color: red;
+}
+
+.link {
+  color: #001a5b;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
 .container-search {
+  /*background: black url("guille-pozzi-sbcIAn4Mn14-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;*/
 }
 
 .search-criteria {
-  background-color: F8F8F8;
+  /*background-color: #f8f8f8;*/
   margin-left: 20%;
   margin-right: 20%;
-  margin-top: 20%;
+  margin-top: 10%;
   margin-bottom: 20%;
 }
 
 .search-criteria-form {
+}
+
+button:hover,
+.submitButton:hover {
+  background: yellow;
+}
+
+.no-results {
+  text-align: center;
+  /*background: white url("guilherme-stecanella-EefsBN5B5GE-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;*/
 }

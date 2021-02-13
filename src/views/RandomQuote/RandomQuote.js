@@ -28,9 +28,7 @@ class RandomQuote extends Component {
           <figure>
             <blockquote>"{quote.content}"</blockquote>
             <figcaption>
-              <bold>
-                <em>- {quote.author}</em>
-              </bold>
+              <span className="author">- {quote.author}</span>
             </figcaption>
           </figure>
         )}

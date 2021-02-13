@@ -1,6 +1,10 @@
 .container-results {
   /*display: flex;*/
   flex-direction: column;
+  /*background: black url("guille-pozzi-sbcIAn4Mn14-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;*/
 }
 
 .quote-results {
@@ -77,4 +81,16 @@
   border: 1px solid black;
   border-radius: 2%;
   padding: 1%;
+}
+
+button:active {
+  background: red;
+}
+
+button:visited {
+  background: purple;
+}
+
+button:hover {
+  background: yellow;
 }

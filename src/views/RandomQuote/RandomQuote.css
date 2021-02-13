@@ -21,4 +21,10 @@ em {
 
 figcaption {
   font: geneva;
+  text-align: center;
+}
+
+.author {
+  font-weight: bold;
+  font-style: italic;
 }

@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SearchContext from "../../context/SearchContext";
 import config from "../../config";
+import Keywords from "./Keywords";
 import Results from "../Results/Results";
 import "./Search.css";
+import RandomQuote from "../RandomQuote/RandomQuote";
+import "../RandomQuote/RandomQuote.css";
 
 const START_DATE = 1920;
 const END_DATE = new Date().getFullYear();
@@ -11,10 +14,10 @@ const END_DATE = new Date().getFullYear();
 class Search extends Component {
   static contextType = SearchContext;
 
-  // start_date & end_date: start year and end year
-  // loading: true (still waiting on NASA search return), else false
+  // start_date & end_date: start year & end year
+  // loading: true/false; waiting on NASA search return
   // limitReached: number of items on the page (max: 100)
-  // keywords: NASA keyword search support
+  // keywords: tags passed to NASA keywords query
   state = {
     start_date: START_DATE,
     end_date: END_DATE,
@@ -23,33 +26,39 @@ class Search extends Component {
     page: 1,
     limitReached: false,
     keywords: {},
+    searchInitialised: false,
+    didMount: false,
+    newSearch: false,
   };
 
   componentDidMount() {
-    // Print out the props
     console.log("mounted: ", this.props);
 
-    // Construct the url using this.props.location (location contains
-    // information about the query params)
     const url = new URLSearchParams(this.props.location.search);
 
-    // Get the query that the user inputted; if no query found, then
-    // pass an empty string
+    // Get the query that the user inputted; if no query
+    // found, the query is empty
     const query = url.get("q") || "";
+    console.log("q: ", query);
 
-    const keywordsText = url.get("keywords") || "";
-    console.log("keywords text", keywordsText);
+    // Get tags/keywords selected by user
+    const keywordsText = url.get("keywords: ") || "";
+    console.log("keywords text: ", keywordsText);
+
+    // If found, separate keywords using a pipe since pipe
+    // works the same as a comma in a url search
+    // Set each keyword to true
     const keywords = keywordsText.length
-      ? keywordsText.split(",").reduce((acc, keyword) => {
+      ? keywordsText.split("||").reduce((acc, keyword) => {
           acc[keyword] = true;
           return acc;
         }, {})
       : {};
 
-    console.log("keywords", keywords);
+    console.log("split keywords: ", keywords);
 
     // Find the page from the url; if nothing found, page is 1 by
-    // default, according to API
+    // default
     const page = parseInt(url.get("page")) || 1;
 
     // Find the start_date from the url; if nothing found, then it's
@@ -61,20 +70,24 @@ class Search extends Component {
     this.context.onQueryChange(query);
 
     if (
-      // Check if we're using default settings to begin with (no
-      // user input)
+      // Check if we're using default settings to begin with
       start_date === START_DATE &&
       end_date === END_DATE &&
       page === 1 &&
-      query === ""
+      query === "" &&
+      !keywordsText.length
     ) {
-      // exit this function if default settings found
+      // Exit this function if default settings found
       console.log("Default search settings found");
       return;
     } else {
-      // if we are using non-default settings, then continue
+      // If we are using non-default settings, then continue
       console.log("User-provided search settings found");
     }
+
+    // This setting is in case we want to generate random quotes
+    // everytime the page is loaded (same as Homepage)
+    this.setState({ didMount: true });
 
     // Default settings found, so we need to 1) pass to state an object
     // containing the state we need to update (page, start_date, end_date,
@@ -109,6 +122,9 @@ class Search extends Component {
     // Otherwise, set it to true
     const tagLower = tag.toLowerCase();
     let nextTagValue = true;
+    this.setState({
+      newSearch: true,
+    });
 
     // Don't allow the user to add the same tag twice to the list of
     // keywords used in the query
@@ -134,44 +150,101 @@ class Search extends Component {
         this.initSearch(this.state.page);
       }
     );
+
+    window.scrollTo(0, 0);
   };
 
   onSubmitSearchForm = (e) => {
-    //Keep the page visible with preventDefault after a search;
-    //Store the url search parameters after user has inputted
-    //their search
+    // Keep the page visible with preventDefault after a search;
+    // Store the url search parameters after user has inputted
+    // their search
     e.preventDefault();
     this.initSearch(this.state.page);
   };
 
   prepareKeywordsUrlValue = (keywords) => {
-    return Object.entries(keywords)
-      .reduce((acc, [keyword, isActive]) => {
-        if (!isActive) return acc;
-        // Keyword is active
-        acc.push(keyword);
-        return acc;
-      }, [])
-      .join(",");
+    if (this.state.keywords) {
+      return Object.entries(keywords)
+        .reduce((acc, [keyword, isActive]) => {
+          if (!isActive) return acc;
+          // Keyword is active
+          acc.push(keyword);
+          return acc;
+        }, [])
+        .join("||");
+    }
   };
 
-  //Get the url search params, so that the user has the full path of
-  //the search available; set loading to true, so that we can indicate
-  //that a search is underway
+  // Use async to return a promise
+  fetchVisionTags = async (nasa_id, image) => {
+    console.log("in fetch vision", nasa_id, image);
+    const taggedResponse = await fetch(
+      "http://localhost:8000/api/vision/tag-images",
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify([image]),
+      }
+    );
+
+    const taggedResults = await taggedResponse.json();
+    const { tags } = taggedResults;
+    const imageTags = tags?.[0];
+    const searchResults = this.context.searchResults.map((item) => {
+      const result = item.data[0];
+      if (result.nasa_id === nasa_id) {
+        const clonedItem = JSON.parse(JSON.stringify(item));
+        clonedItem.data[0].tags = imageTags;
+        return clonedItem;
+      }
+      return item;
+    });
+
+    this.context.setResults(searchResults);
+  };
+
   initSearch = async (page) => {
+    // initSearch is used to track a number of things required by
+    // Search: url, loading, whether new search has been triggered,
+    // results, number hits.
+
+    // Get the url search params, so that the user has the full path of
+    // the search available
     const keywordsText = this.prepareKeywordsUrlValue(this.state.keywords);
     const urlParams = `?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&keywords=${keywordsText}&page=${page}`;
-    const SEARCH_URL = `${config.API_ENDPOINT}${urlParams}`;
+    const SEARCH_URL = `${config.NASA_API_ENDPOINT}${urlParams}`;
     this.props.history.push(`${this.props.match.path}${urlParams}`);
-    this.setState({
-      loading: true,
-    });
+
+    // Need to know whether loading is true so that Submit
+    // button can indicate that a search is underway
+    // newSearch is needed to track when it's time to
+    // display a new random quote
+    // Callback function executes once setState has completed
+    // and component has re-rendered
+    this.setState(
+      {
+        loading: true,
+        newSearch: false,
+      },
+      () => {
+        this.setState({
+          newSearch: true,
+        });
+      }
+    );
+
+    // Use await to pass code through a promise;
+    // this fetch lets us know whether we need to
+    // paginate, whether we're loading, what the
+    // results are, and number of items in the results
     try {
       const response = await fetch(SEARCH_URL, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${config.API_KEY}`,
+          Authorization: `Bearer ${config.NASA_API_KEY}`,
         },
         type: "cors",
       });
@@ -184,33 +257,8 @@ class Search extends Component {
         });
       }
 
-      const itemsToTag = result.collection.items
-        .slice(0, 5)
-        .map((item) => item.links?.[0].href);
-      console.log("items to tag: ", itemsToTag);
-      const taggedResponse = await fetch(
-        "http://localhost:8000/api/vision/tag-images",
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(itemsToTag),
-        }
-      );
-
-      const taggedResults = await taggedResponse.json();
-
-      console.log({ taggedResults });
-      const { tags } = taggedResults;
-
-      let data = [...result.collection.items];
-      tags.forEach((imageTags, index) => {
-        data[index].data[0].tags = imageTags;
-      });
-
       this.context.onSearchResults({
-        results: data,
+        results: result.collection.items,
         total_hits: result.collection.metadata.total_hits,
       });
       this.setState({
@@ -221,61 +269,28 @@ class Search extends Component {
       this.setState({
         error: error.message,
         loading: false,
+        newSearch: false,
+      });
+    } finally {
+      if (this.state.searchInitialised) return;
+      this.setState({
+        searchInitialised: true,
+        /*newSearch: true,*/
       });
     }
-
-    //Fetch the search data; each page includes up to 100 images, according
-    //to NASA API; establish whether limitReached (needed for Next) was found
-    //for current page; get results and total_hits (number items found); set
-    //loading to false
-
-    /*
-    fetch(SEARCH_URL, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${config.API_KEY}`,
-      },
-      type: "cors",
-    })
-      .then((response) => response.json())
-      .then(async (result) => {
-        console.log("Success: ", result);
-        if (result.collection.items.length < 100) {
-          this.setState({
-            limitReached: true,
-          });
-        }
-      })
-      .then((result) => {
-        this.context.onSearchResults({
-          results: result.collection.items,
-          total_hits: result.collection.metadata.total_hits,
-        });
-        this.setState({
-          loading: false,
-        });
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-        this.setState({
-          error: error.message,
-          loading: false,
-        });
-      });*/
   };
 
-  //When the query has been changed by the user, we need to reset
-  //the page to 1 (default) in both state and context
   onQueryChange = (e) => {
+    // When the query has been changed by the user, reset
+    // the page to 1 (default)
     if (this.state.page > 1) {
       this.setState({ page: 1 });
     }
     this.context.onQueryChange(e.target.value);
   };
 
-  //Track pagination for Next
   onNextPage = (e) => {
+    // Track pagination for Next
     e.preventDefault();
     if (this.state.limitReached) return;
     const nextPage = this.state.page + 1;
@@ -285,64 +300,82 @@ class Search extends Component {
     this.initSearch(nextPage);
   };
 
-  //Track pagination for Previous
   onPrevPage = (e) => {
+    // Track pagination for Previous
     e.preventDefault();
     const prevPage = this.state.page === 1 ? 1 : this.state.page - 1;
     this.setState({ page: prevPage });
     this.initSearch(prevPage);
   };
 
-  //Count the number of pages to display (denominator = results/page)
+  // May end up using this:
+  // Count the number of pages to display (denominator = results/page)
   /*getPagesCount = (total, denominator) => {
     const divisible = total % denominator === 0;
     const valueToBeAdded = divisible ? 0 : 1;
     return Math.floor(total / denominator) + valueToBeAdded;
   };*/
 
-  //We need a Reset button so that the search params and pagination
-  //can be set back to the default values; also, the results and url
-  //need to be cleared
   resetForm = (e) => {
-    //Stop the event from continuing to display the results
+    // Reset button sets search params and pagination
+    // back to the default values; also, the results and url
+    // are cleared
+
+    // Stop the event from continuing to display the results
     e.preventDefault();
-    //Go back to default settings
+    // Go back to default settings
     this.setState({
       page: 1,
       start_date: START_DATE,
       end_date: END_DATE,
+      keywords: {},
+      searchInitialised: false,
+      newSearch: false,
     });
-    //Clear query entered by user
+    // Clear query entered by user
     this.context.onQueryChange("");
-    //Clear results displayed on the Search page
+    // Clear results displayed on the Search page
     this.context.setResults([]);
-    //Clear url search params
+    // Clear url search params
     this.props.history.push("/search");
   };
 
-  //On the Search page, navbar links open new pages to prevent any
-  //clearing of search results; Submit button should indicate whether
-  //loading is happening; if search results found, then render them;
-  //otherwise render null
+  removeKeyword = (e, keyword) => {
+    e.preventDefault();
+    let keywords = { ...this.state.keywords };
+    delete keywords[keyword];
+    this.setState(
+      {
+        keywords,
+      },
+      () => this.initSearch(this.state.page)
+    );
+  };
+
   render() {
+    // On the Search page, navbar links open new pages to prevent any
+    // clearing of search results
+    // If search results found, then render them; otherwise render null
+    // If search has been done, then display a new quote
     console.log("this in search: ", this);
     return (
       <div className="container-search">
         <nav className="navbar">
-          <Link to="/" target="_blank" className="home-link">
+          <Link to="/" target="_blank" className="link">
             Home
           </Link>
-          <Link to="/search" target="_blank" className="search-link">
+          <Link to="/search" target="_blank" className="link">
             Search
           </Link>
-          <Link to="/about" target="_blank" className="about-link">
+          <Link to="/about" target="_blank" className="link">
             About
           </Link>
         </nav>
+
         <div className="search-criteria">
+          {this.state.newSearch ? <RandomQuote /> : <span></span>}
           <p className="search-criteria-intro">Enter Search Criteria:</p>
           <form
-            action="/my-handling-form-page"
             method="get"
             className="search-criteria-form"
             onSubmit={this.onSubmitSearchForm}
@@ -390,9 +423,23 @@ class Search extends Component {
               id="end_date"
               onChange={this.updateFormState}
             />
+
             <label htmlFor="end_date">End date ({this.state.end_date})</label>
+
+            {parseInt(this.state.start_date) > parseInt(this.state.end_date) ? (
+              <p className="error-text">
+                Start date must be before the end date!
+              </p>
+            ) : null}
             <br></br>
+
+            <Keywords
+              keywords={this.state.keywords}
+              removeKeyword={this.removeKeyword}
+            />
+            <br />
             <input
+              className="submitButton"
               type="submit"
               value={this.state.loading ? "Submitting" : "Submit"}
               disabled={this.state.loading}
@@ -400,13 +447,15 @@ class Search extends Component {
             <button onClick={this.resetForm}>Reset</button>
           </form>
         </div>
-        {this.context.searchResults.length ? (
-          <>
-            <Results
-              items={this.context.searchResults}
-              total_hits={this.context.total_hits}
-              onTagClick={this.onTagClick}
-            />
+        <>
+          <Results
+            items={this.context.searchResults}
+            total_hits={this.context.total_hits}
+            onTagClick={this.onTagClick}
+            fetchVisionTags={this.fetchVisionTags}
+            searchInitialised={this.state.searchInitialised}
+          />
+          {this.context.searchResults.length ? (
             <nav className="footer-results">
               {this.state.page !== 1 ? (
                 <button onClick={this.onPrevPage}>Prev</button>
@@ -421,8 +470,8 @@ class Search extends Component {
                 <span></span>
               )}
             </nav>
-          </>
-        ) : null}
+          ) : null}
+        </>
       </div>
     );
   }

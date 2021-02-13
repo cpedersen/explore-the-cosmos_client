@@ -1,33 +1,40 @@
 .navbar {
-background: #D3D3D3;
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-justify-content: space-between;
+  background: #d3d3d3;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.link {
+  color: #001a5b;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
 }
 
 .container-description {
-background-color: F8F8F8;
+  background-color: F8F8F8;
 }
 
 .item-description {
-text-align: left;
-vertical-align: center;
-margin-left: 20%;
-margin-right: 20%;
-margin-top: 20%;
-margin-bottom: 25%;
+  text-align: left;
+  vertical-align: center;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 20%;
+  margin-bottom: 25%;
 }
 
 .header-description {
-font-size: 120%;
-text-decoration: underline;
+  font-size: 120%;
+  text-decoration: underline;
 }
 
 .container-footer-results {
-background: #D3D3D3;
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-justify-content: space-between;
+  background: #d3d3d3;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
 }

@@ -1,13 +1,19 @@
 nav {
-    background: #D3D3D3;
+  /*background: #D3D3D3;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;*/
 }
 
 .container-about {
-
 }
 
 .about-text {
-    margin: 10%;
+  margin: 10%;
+}
+
+.link {
+  color: #001a5b;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
 }

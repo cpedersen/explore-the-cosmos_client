@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Homepage.css";
 import RandomQuote from "../RandomQuote/RandomQuote";
+import "../RandomQuote/RandomQuote.css";
 
 class Homepage extends Component {
   render() {
     return (
       <div className="container-homepage">
         <nav className="navbar">
-          <Link to="" className="home-link"></Link>
-          <Link to="" className="search-link"></Link>
-          <Link to="/about" className="about-link">
+          <Link to="" className="link"></Link>
+          <Link to="" className="link"></Link>
+          <Link to="/about" className="link">
             About
           </Link>
         </nav>
