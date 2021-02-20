@@ -3,6 +3,8 @@
 
 figure {
   background: rgba(0, 0, 0, 0.4);
+  /*background: #404040;*/
+  /*background: rgba(0, 0, 110, 1);*/
   color: white;
   padding: 20px;
   border-radius: 3px;

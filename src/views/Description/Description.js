@@ -51,12 +51,17 @@ class Description extends Component {
   render() {
     //console.log("this in description: ", this);
     const {
+      title,
       center,
       description,
       date_created,
       nasa_id,
       image,
+      location,
     } = this.state.data;
+
+    const readable_date = new Date(date_created).toDateString();
+
     return (
       <div className="container-description">
         <nav className="navbar">
@@ -67,17 +72,31 @@ class Description extends Component {
           <Link to="/" className="no-link"></Link>
         </nav>
         <div className="item-description">
-          <div className="header-description">Description Information:</div>
+          <h2 className="header-description">{title}</h2>
           <ul>
-            <li>URL: {image}</li>
-            <li>File Size</li>
-            <li>File Format</li>
-            <li>NASA ID: {nasa_id}</li>
-            <li>Center: {center}</li>
-            <li>Date Created: {date_created}</li>
-            <li>Location</li>
-            <li>Photographer</li>
-            <li>Description: {description}</li>
+            <li>
+              <b>URL: </b>{" "}
+              <a target="_blank" href={image}>
+                {image}
+              </a>
+            </li>
+            {/*<li>File Size</li>
+            <li>File Format</li>*/}
+            <li>
+              <b>NASA ID: </b> {nasa_id}
+            </li>
+            <li>
+              <b>Center: </b> {center}
+            </li>
+            <li>
+              <b>Date Created: </b> {readable_date}
+            </li>
+            <li>
+              <b>Location: </b> {location}
+            </li>
+            <li>
+              <b>Description:</b> {description}
+            </li>
           </ul>
         </div>
       </div>

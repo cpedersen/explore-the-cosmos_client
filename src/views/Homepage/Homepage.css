@@ -12,7 +12,7 @@
 }
 
 .container-homepage {
-  background: black url("guille-pozzi-sbcIAn4Mn14-unsplash.jpg");
+  background: black url("../images/guille-pozzi-sbcIAn4Mn14-unsplash.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -43,7 +43,7 @@
   margin: 20px auto;
   border-radius: 4px;
   color: white;
-  background: url(./guille-pozzi-sbcIAn4Mn14-unsplash.jpg);
+  background: url(../images/guille-pozzi-sbcIAn4Mn14-unsplash.jpg);
   background-size: cover;
   background-position: center;
 }

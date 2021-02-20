@@ -1,10 +1,14 @@
+body {
+}
+
 .container-results {
-  /*display: flex;*/
-  flex-direction: column;
-  /*background: black url("guille-pozzi-sbcIAn4Mn14-unsplash.jpg");
+  /*flex-direction: column;*/
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;*/
+  background-repeat: no-repeat;
+  color: white;
+  /*background: black
+    url("../images/jeremy-thomas-E0AHdsENmDg-unsplash-large.jpg");*/
 }
 
 .quote-results {
@@ -47,14 +51,14 @@
 
 .item {
   text-align: left;
-  background-color: #a9a9a9;
+  /*background-color: #a9a9a9;*/
 }
 
 .all-tags {
 }
 
 .tags-nasa {
-  background-color: #c0c0c0;
+  /*background-color: #c0c0c0;*/
 }
 
 .tags-google {
@@ -63,6 +67,7 @@
 
 .footer-results {
   flex-shrink: 0;
+  color: black;
 }
 
 .item-result-image {
