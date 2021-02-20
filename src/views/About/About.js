@@ -16,30 +16,76 @@ class About extends Component {
           <Link to="" className="no-link"></Link>
         </nav>
         <div className="about-text">
+          <h2>Explore the Cosmos with Carl Sagan</h2>
           <p>
-            Talk about Carl Sagan, describing his spirit of exploration and
-            wonder.
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Carl_Sagan">
+              Carl Sagan
+            </a>{" "}
+            was an American astronomer, who captivated audiences with his{" "}
+            <a
+              target="_blank"
+              href="https://en.wikipedia.org/wiki/Cosmos:_A_Personal_Voyage"
+            >
+              Cosmos
+            </a>{" "}
+            TV series in 1980. He was the face of science in America, reminding
+            us again and again that we're but a granular element in the universe
+            -- encouraging us to explore who we are by learning where we came
+            from.{" "}
+            <a
+              target="_blank"
+              href="https://www.youtube.com/watch?v=PPTnuUcUVVY"
+            >
+              "We are made of starstuff,"
+            </a>{" "}
+            he would say with characteristic boyish enthusiasm.
           </p>
-          <p>Describe NASA.</p>
           <p>
-            Describe NASA's public repository of images, which was provided to
-            excite the public about astronomy.
+            Sagan played a leading role in the American space program from its
+            very beginning. He was an adviser to the{" "}
+            <a target="_blank" href="https://en.wikipedia.org/wiki/NASA">
+              National Aeronautics and Space Administration (NASA)
+            </a>{" "}
+            starting in 1958, when NASA was formed. NASA awarded him with medals
+            for both his scientific achievement and public service educating
+            citizens. NASA has always tried to engage the public in its efforts
+            to collect data about the solar system and the universe. Indeed,
+            NASA's pictures are{" "}
+            <a
+              target="_blank"
+              href="https://www.nasa.gov/multimedia/guidelines/index.html"
+            >
+              legally in the public domain
+            </a>
+            .
           </p>
-          <p>Explain that 100 images are displayed per page.</p>
           <p>
-            Explain how keywords work: that this is a NASA query param, that
-            selecting it again will clear it, that if you don't find what you're
-            looking for using the keyword then try using the keyword in the
-            Search field.
+            As part of its educational effort, NASA developed{" "}
+            <a target="_blank" href="https://api.nasa.gov/">
+              {" "}
+              APIs
+            </a>{" "}
+            intended to make NASA's data, including imagery,{" "}
+            <a target="_blank" href="https://sti.nasa.gov/for-developers/">
+              "eminently accessible"
+            </a>
+            . Almost 185,000 images are currently searchable using text or NASA
+            keywords. In this tool, we also provide{" "}
+            <a
+              target="_blank"
+              href="https://cloud.google.com/vision/docs/labels"
+            >
+              Google Vision API labels
+            </a>{" "}
+            to further inspire your searches. One hundred images are displayed
+            per page in the results. In addition, every search rewards you with
+            a new Carl Sagan quote.
           </p>
-          <p>
-            Specifically explain how the NASA keywords work: that NASA has
-            created these for potentially useful searches of their repository.
-          </p>
-          <p>
-            Specifically explain how Google Vision labels work: that these run
-            the images through the Google Vision API and create potentially
-            useful (or useless) terms to use in the searches.
+          <p className="last-paragraph">
+            <em>
+              Let Carl Sagan be your inspiration while you take this journey
+              around the Cosmos.
+            </em>
           </p>
         </div>
       </div>

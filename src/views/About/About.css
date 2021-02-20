@@ -1,14 +1,20 @@
 nav {
-  /*background: #D3D3D3;
-    display: flex;
-    justify-content: space-between;*/
 }
 
 .container-about {
+  /*background: black url("../images/greg-jeanneau-9sxeKzuCVoE-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;*/
+  color: black;
+  padding-bottom: 100%;
+  background-color: rgba(52, 73, 94, 1);
 }
 
 .about-text {
   margin: 10%;
+  background: white;
+  padding: 5%;
 }
 
 .link {
@@ -16,4 +22,12 @@ nav {
   margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 5px;
+}
+
+h2 {
+  margin-top: 0%;
+  text-align: center;
+}
+
+.last-line {
 }
