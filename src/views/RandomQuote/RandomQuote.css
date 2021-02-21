@@ -3,8 +3,6 @@
 
 figure {
   background: rgba(0, 0, 0, 0.4);
-  /*background: #404040;*/
-  /*background: rgba(0, 0, 110, 1);*/
   color: white;
   padding: 20px;
   border-radius: 3px;
@@ -13,8 +11,7 @@ figure {
 }
 
 blockquote {
-  /*font: verdana;*/
-  font: geneva;
+  font: arial;
 }
 
 em {
@@ -29,4 +26,10 @@ figcaption {
 .author {
   font-weight: bold;
   font-style: italic;
+}
+
+@media (max-width: 620px) {
+  figure {
+    padding: 15px 10px;
+  }
 }

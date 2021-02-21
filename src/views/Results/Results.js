@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Results.css";
 import ResultItem from "./ResultItem";
+import Keywords from "../Search/Keywords";
 
 class Results extends Component {
   onTagClick = (e, keyword) => {
@@ -22,7 +23,7 @@ class Results extends Component {
             "No results found"
           ) : searchInitialised ? (
             <div className="results-count">
-              <p>{total_hits} Results Found...</p>
+              <p>{total_hits} results found...</p>
             </div>
           ) : null}
           {items.map((item) => {
@@ -32,6 +33,7 @@ class Results extends Component {
                 onTagClick={this.onTagClick}
                 key={item.data[0].nasa_id}
                 fetchVisionTags={fetchVisionTags}
+                keywords={this.props.keywords}
               />
             );
           })}

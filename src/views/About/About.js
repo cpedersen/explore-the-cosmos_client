@@ -70,16 +70,20 @@ class About extends Component {
               "eminently accessible"
             </a>
             . Almost 185,000 images are currently searchable using text or NASA
-            keywords. In this tool, we also provide{" "}
+            keywords. In this Explore the Cosmos tool, we also provide{" "}
             <a
               target="_blank"
               href="https://cloud.google.com/vision/docs/labels"
             >
               Google Vision API labels
             </a>{" "}
-            to further inspire your searches. One hundred images are displayed
-            per page in the results. In addition, every search rewards you with
-            a new Carl Sagan quote.
+            to further inspire your searches. New searches are performed using the 
+            NASA API's keyword field when a NASA keyword or Google label are selected. The keyword or tag can be
+            de-selected either by selecting the 'x' in the search criteria
+            section at the top of the Search page, or by selecting the keyword
+            or tag once again. One hundred images are displayed per page in the
+            results. In addition, every search rewards you with a new Carl Sagan
+            quote.
           </p>
           <p className="last-paragraph">
             <em>

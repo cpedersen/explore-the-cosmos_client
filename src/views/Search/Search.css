@@ -1,5 +1,4 @@
 body {
-  /*background-color: #c0c0c0;*/
   background-color: rgba(52, 73, 94, 1);
 }
 
@@ -9,9 +8,15 @@ nav {
   justify-content: space-between;
 }
 
+.monospace {
+  font-family: monospace;
+  margin-top: -8px;
+  display: block;
+}
+
 .error-text {
   color: red;
-  margin-bottom: 0%;
+  margin-bottom: 5%;
 }
 
 label {
@@ -31,29 +36,51 @@ label {
   background-position: center;
   background-repeat: no-repeat;
   color: white;
-  /*background: black url("../images/guille-pozzi-sbcIAn4Mn14-unsplash.jpg");*/
-  padding-bottom: 100%;
 }
 
 .search-criteria {
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 10%;
-  margin-bottom: 20%;
+  margin: 10% 20%;
+}
+
+form input[type="submit"],
+form button {
+  padding: 4px 10px;
+  width: 100px;
+  color: rgba(52, 73, 94, 1);
+  text-shadow: 1px 1px 1px white;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover,
+form button:hover {
+  /*transform: translateY(-3px);*/
+  box-shadow: 0 2px 2px -2px black;
 }
 
 .search-criteria-form {
+  text-align: center;
+  margin-top: 40px;
+}
+
+table {
+  margin: 10px auto;
+}
+
+label {
+  margin-right: 15px;
+}
+
+input[type="search"] {
+  padding: 3px 5px;
+  border-radius: 3px;
+  border: 1px solid #eee;
 }
 
 button,
 .submitButton {
   font-size: 16px;
   margin: 2px;
-}
-
-button:hover,
-.submitButton:hover {
-  background: yellow;
 }
 
 .no-results {
@@ -74,4 +101,18 @@ button:hover,
   text-align: center;
   margin: 0em;
   font: 400 13.3333px Arial;
+}
+
+.x-tag {
+  font-size: 10px;
+  width: 16px;
+  height: 20px;
+  padding: 5px 10px 14px 5px;
+}
+
+@media (max-width: 480px) {
+  .search-criteria {
+    width: 90%;
+    margin: 10% auto;
+  }
 }

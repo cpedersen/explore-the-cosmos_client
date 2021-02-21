@@ -1,6 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Results.css";
+import "./ResultItem.css";
 import { Link } from "react-router-dom";
+
+const getClassNames = (classes) => {
+  // Need to find CSS classes associated with
+  // selected tags for the purpose of highlighting
+  return Object.entries(classes)
+    .filter(([c, a]) => a)
+    .map(([c]) => c)
+    .join(" ");
+};
 
 const ResultItem = (props) => {
   // Purpose of this component is to provide a way for
@@ -61,9 +71,14 @@ const ResultItem = (props) => {
     };
   }, [containerRef.current]);
 
+  //console.log("keywords: ", props.keywords);
+
   return (
     <div ref={containerRef} className="item-result" key={nasa_id}>
-      <div className="item">{title}</div>
+      <div className="item">
+        <b>NASA ID: </b>
+        {title}
+      </div>
       <div>
         <Link to={`/description/${nasa_id}`}>
           <img
@@ -76,12 +91,18 @@ const ResultItem = (props) => {
       <div className="all-tags">
         <div className="tags-nasa">
           <div>
-            <b>NASA keywords: </b>
+            NASA keywords:
             {keywords?.map((keyword, index) => {
               return (
-                <button className="single-nasa-tag" key={index}>
+                <button
+                  className={getClassNames({
+                    "single-nasa-tag": true,
+                    selected: Boolean((props.keywords || {})[keyword]),
+                  })}
+                  key={index}
+                >
                   <a onClick={(e) => onTagClick(e, keyword)} key={index}>
-                    <span>{keyword} </span>
+                    <span>{keyword}</span>
                   </a>
                 </button>
               );
@@ -89,14 +110,17 @@ const ResultItem = (props) => {
           </div>
           {tags ? (
             <div>
-              <b>Google Vision labels:</b>
+              Google Vision labels:
               {loadingTags ? (
                 <p>Loading labels...</p>
               ) : (
                 tags.map(({ score, description }, index) => {
                   return (
                     <button
-                      className="single-vision-tag"
+                      className={getClassNames({
+                        "single-vision-tag": true,
+                        selected: false,
+                      })}
                       key={`${score}-${index}`}
                     >
                       <a

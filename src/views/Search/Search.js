@@ -32,18 +32,18 @@ class Search extends Component {
   };
 
   componentDidMount() {
-    console.log("mounted: ", this.props);
+    //console.log("mounted: ", this.props);
 
     const url = new URLSearchParams(this.props.location.search);
 
     // Get the query that the user inputted; if no query
     // found, the query is empty
     const query = url.get("q") || "";
-    console.log("q: ", query);
+    //console.log("q: ", query);
 
     // Get tags/keywords selected by user
     const keywordsText = url.get("keywords: ") || "";
-    console.log("keywords text: ", keywordsText);
+    //console.log("keywords text: ", keywordsText);
 
     // If found, separate keywords using a pipe since pipe
     // works the same as a comma in a url search
@@ -55,7 +55,7 @@ class Search extends Component {
         }, {})
       : {};
 
-    console.log("split keywords: ", keywords);
+    //console.log("split keywords: ", keywords);
 
     // Find the page from the url; if nothing found, page is 1 by
     // default
@@ -78,11 +78,11 @@ class Search extends Component {
       !keywordsText.length
     ) {
       // Exit this function if default settings found
-      console.log("Default search settings found");
+      //console.log("Default search settings found");
       return;
     } else {
       // If we are using non-default settings, then continue
-      console.log("User-provided search settings found");
+      //console.log("User-provided search settings found");
     }
 
     // This setting is in case we want to generate random quotes
@@ -120,7 +120,7 @@ class Search extends Component {
     // Is the tag in keywords?
     // If it is, set it to the opposite value
     // Otherwise, set it to true
-    const tagLower = tag.toLowerCase();
+    const tagLower = tag; //.toLowerCase();
     let nextTagValue = true;
     this.setState({
       newSearch: true,
@@ -132,9 +132,9 @@ class Search extends Component {
     // the query (nextTagValue = true/false)
     if (Reflect.has(this.state.keywords, tagLower)) {
       nextTagValue = !this.state.keywords[tagLower];
-      console.log("nextTagValue inside Reflect: ", nextTagValue);
+      //console.log("nextTagValue inside Reflect: ", nextTagValue);
     }
-    console.log("nextTagValue: ", nextTagValue);
+    //console.log("nextTagValue: ", nextTagValue);
 
     const keywords = {
       ...this.state.keywords,
@@ -177,7 +177,7 @@ class Search extends Component {
 
   // Use async to return a promise
   fetchVisionTags = async (nasa_id, image) => {
-    console.log("in fetch vision", nasa_id, image);
+    //console.log("in fetch vision", nasa_id, image);
     const taggedResponse = await fetch(
       "http://localhost:8000/api/vision/tag-images",
       {
@@ -250,8 +250,8 @@ class Search extends Component {
       });
 
       const result = await response.json();
-      console.log("NASA results: ", result);
-      if (result.collection.items.length < 100) {
+      //console.log("NASA results: ", result);
+      if (result.collection.items?.length < 100) {
         this.setState({
           limitReached: true,
         });
@@ -357,7 +357,7 @@ class Search extends Component {
     // clearing of search results
     // If search results found, then render them; otherwise render null
     // If search has been done, then display a new quote
-    console.log("this in search: ", this);
+    //console.log("this in search: ", this);
     return (
       <div className="container-search">
         <nav className="navbar">
@@ -374,22 +374,21 @@ class Search extends Component {
 
         <div className="search-criteria">
           {this.state.newSearch ? <RandomQuote /> : <span></span>}
-          <p className="search-criteria-intro">Enter Search Criteria:</p>
+          {/*<!--<p className="search-criteria-intro">Enter Search Criteria:</p>-->*/}
           <form
             method="get"
             className="search-criteria-form"
             onSubmit={this.onSubmitSearchForm}
           >
+            <label htmlFor="search">Enter search text</label>
             <input
               type="search"
-              value={this.context.query}
+              value={this.context.query || ""}
               name="query"
               id="search"
               placeholder="Search..."
               onChange={this.onQueryChange}
             />
-            <label htmlFor="search">Enter search text</label>
-            <br></br>
             {/*<input type="radio" checked={this.state.resultsType === 'most-recent'} value="most-recent" name="resultsType" id="recent" onChange={this.updateFormState}/> 
                         <label htmlFor="recent">Most recent</label>
                         <br>
@@ -400,44 +399,65 @@ class Search extends Component {
                         </br>
                         <input type="radio" checked={this.state.resultsType === ''} value="" name="resultsType" id="no-search-result-type" onChange={this.updateFormState}/> 
                         <label htmlFor="no-search-result-type">None</label>*/}
-            <br></br>
-            <input
-              type="range"
-              name="start_date"
-              value={this.state.start_date}
-              min={START_DATE}
-              max={END_DATE}
-              id="start_date"
-              onChange={this.updateFormState}
-            />
-            <label htmlFor="start_date">
-              Start date ({this.state.start_date})
-            </label>
-            <br></br>
-            <input
-              type="range"
-              name="end_date"
-              value={this.state.end_date}
-              min={START_DATE}
-              max={END_DATE}
-              id="end_date"
-              onChange={this.updateFormState}
-            />
 
-            <label htmlFor="end_date">End date ({this.state.end_date})</label>
+            <table>
+              <tr>
+                <td>
+                  <input
+                    type="range"
+                    name="start_date"
+                    value={this.state.start_date}
+                    min={START_DATE}
+                    max={END_DATE}
+                    id="start_date"
+                    onChange={this.updateFormState}
+                  />
+                </td>
+                <td>
+                  <label htmlFor="start_date">Start date</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="monospace">{this.state.start_date}</span>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    type="range"
+                    name="end_date"
+                    value={this.state.end_date}
+                    min={START_DATE}
+                    max={END_DATE}
+                    id="end_date"
+                    onChange={this.updateFormState}
+                  />
+                </td>
+                <td>
+                  <label htmlFor="end_date">End date</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="monospace">{this.state.end_date}</span>
+                </td>
+                <td></td>
+              </tr>
+            </table>
 
             {parseInt(this.state.start_date) > parseInt(this.state.end_date) ? (
               <p className="error-text">
                 Start date must be before the end date!
               </p>
             ) : null}
-            <br></br>
 
             <Keywords
               keywords={this.state.keywords}
               removeKeyword={this.removeKeyword}
             />
-            <br />
+
             <input
               className="submitButton"
               type="submit"
@@ -454,8 +474,9 @@ class Search extends Component {
             onTagClick={this.onTagClick}
             fetchVisionTags={this.fetchVisionTags}
             searchInitialised={this.state.searchInitialised}
+            keywords={this.state.keywords}
           />
-          {this.context.searchResults.length ? (
+          {this.context.searchResults?.length ? (
             <nav className="footer-results">
               {this.state.page !== 1 ? (
                 <button onClick={this.onPrevPage}>Prev</button>

@@ -6,7 +6,7 @@ const Keywords = (props) => {
   const [activeKeywords, setActiveKeywords] = useState([]);
 
   useEffect(() => {
-    console.log("keywords", keywords);
+    //console.log("keywords: ", keywords);
     // Loop through keywords and create a new array
     // with only active keywords
     const newActiveKeywords = Object.entries(keywords).reduce(
@@ -20,7 +20,7 @@ const Keywords = (props) => {
     setActiveKeywords(newActiveKeywords);
   }, [keywords]);
 
-  return (
+  return activeKeywords.length ? (
     <div>
       <span className="keywords-section">Keywords:</span>
       <br />
@@ -31,12 +31,19 @@ const Keywords = (props) => {
               {keyword}
             </span>
             <span>
-              <button onClick={(e) => removeKeyword(e, keyword)}>X</button>
+              <button
+                className="x-tag"
+                onClick={(e) => removeKeyword(e, keyword)}
+              >
+                <b>X</b>
+              </button>
             </span>
           </div>
         );
       })}
     </div>
+  ) : (
+    <div></div>
   );
 };
 

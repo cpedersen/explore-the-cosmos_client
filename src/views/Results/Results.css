@@ -2,13 +2,10 @@ body {
 }
 
 .container-results {
-  /*flex-direction: column;*/
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: white;
-  /*background: black
-    url("../images/jeremy-thomas-E0AHdsENmDg-unsplash-large.jpg");*/
 }
 
 .quote-results {
@@ -51,18 +48,15 @@ body {
 
 .item {
   text-align: left;
-  /*background-color: #a9a9a9;*/
 }
 
 .all-tags {
 }
 
 .tags-nasa {
-  /*background-color: #c0c0c0;*/
 }
 
 .tags-google {
-  background-color: #dddddd;
 }
 
 .footer-results {
@@ -89,7 +83,8 @@ body {
 }
 
 button:active {
-  background: red;
+  background: yellow;
+  /*background: #003153;*/
 }
 
 button:visited {
@@ -97,5 +92,5 @@ button:visited {
 }
 
 button:hover {
-  background: yellow;
+  /*background: yellow;*/
 }

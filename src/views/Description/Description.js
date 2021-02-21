@@ -11,8 +11,10 @@ class Description extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     const SEARCH_URL = `${config.NASA_API_ENDPOINT}?nasa_id=${this.props.match.params.nasa_id}`;
-    console.log("SEARCH URL: " + SEARCH_URL);
+    //console.log("SEARCH URL: " + SEARCH_URL);
     this.setState({
       loading: true,
       error: null,
