@@ -80,27 +80,37 @@ class Description extends Component {
           <h2 className="header-description">{title}</h2>
           <ul>
             <li>
-              <b>URL: </b>{" "}
-              <a rel="noreferrer" target="_blank" href={image}>
+              <b>URL: </b> <br></br>
+              <a
+                className="url-line"
+                rel="noreferrer"
+                target="_blank"
+                href={image}
+              >
                 {image}
               </a>
             </li>
             {/*<li>File Size</li>
             <li>File Format</li>*/}
             <li>
-              <b>NASA ID: </b> {nasa_id}
+              <b>NASA ID: </b> <br></br>
+              {nasa_id}
             </li>
             <li>
-              <b>Center: </b> {center}
+              <b>Center: </b> <br></br>
+              {center}
             </li>
             <li>
-              <b>Date Created: </b> {readable_date}
+              <b>Date Created: </b> <br></br>
+              {readable_date}
             </li>
             <li>
-              <b>Location: </b> {location}
+              <b>Location: </b> <br></br>
+              {location}
             </li>
             <li>
-              <b>Description:</b> {description}
+              <b>Description:</b> <br></br>
+              {description}
             </li>
           </ul>
         </div>

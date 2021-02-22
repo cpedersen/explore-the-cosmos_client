@@ -44,3 +44,12 @@ li {
   align-items: flex-start;
   justify-content: space-between;
 }
+
+.url-line {
+}
+
+@media (max-width: 820px) {
+  .url-line {
+    font-size: 70%;
+  }
+}
