@@ -29,8 +29,8 @@ class About extends Component {
               Cosmos
             </a>{" "}
             TV series in 1980. He was the face of science in America, reminding
-            us again and again that we're but a granular element in the universe
-            -- encouraging us to explore who we are by learning where we came
+            us again and again that we are but a granular part of the universe,
+            and encouraging us to explore who we are by learning where we came
             from.{" "}
             <a
               target="_blank"
@@ -42,7 +42,7 @@ class About extends Component {
           </p>
           <p>
             Sagan played a leading role in the American space program from its
-            very beginning. He was an adviser to the{" "}
+            inception. He was an adviser to the{" "}
             <a target="_blank" href="https://en.wikipedia.org/wiki/NASA">
               National Aeronautics and Space Administration (NASA)
             </a>{" "}
@@ -71,7 +71,7 @@ class About extends Component {
             </a>
             . Almost 185,000 images are currently searchable using text or NASA
             keywords. In this Explore the Cosmos tool, one hundred images are
-            displayed per page in the results.{" "}
+            displayed per page of results.{" "}
             <a
               target="_blank"
               href="https://cloud.google.com/vision/docs/labels"
@@ -83,8 +83,8 @@ class About extends Component {
             Google label are selected. The keyword or label can be de-selected
             either by selecting the 'x' in the search criteria section at the
             top of the Search page, or by selecting the highlighted keyword or
-            label yet again. In addition, every search rewards you with a new
-            Carl Sagan quote.
+            label yet again. In addition, every search rewards you with a Carl
+            Sagan quote.
           </p>
           <div></div>
           <p className="last-paragraph">
