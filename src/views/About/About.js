@@ -85,8 +85,7 @@ class About extends Component {
             </a>
             . Almost 185,000 images are currently searchable using text or NASA
             keywords. In this Explore the Cosmos tool, one hundred images are
-            displayed per page of results. (Note that Prev and Next buttons in
-            the footer may take a few moments to load.){" "}
+            displayed per page of results.{" "}
             <a
               target="_blank"
               rel="noreferrer"
@@ -94,13 +93,14 @@ class About extends Component {
             >
               Google Vision API labels
             </a>{" "}
-            are provided to further inspire your searches. New searches are
-            performed using the NASA API's keyword field when a NASA keyword or
-            Google label are selected. The keyword or label can be de-selected
-            either by selecting the 'x' in the search criteria section at the
-            top of the Search page, or by selecting the highlighted keyword or
-            label yet again. In addition, every search rewards you with a Carl
-            Sagan quote.
+            are provided to further inspire your searches. (Note that the Google
+            labels and Prev/Next buttons in the footer may take a few moments to
+            load.) New searches are performed using the NASA API's keyword field
+            when a NASA keyword or Google label are selected. The keyword or
+            label can be de-selected either by selecting the 'x' in the search
+            criteria section at the top of the Search page, or by selecting the
+            highlighted keyword or label yet again. In addition, every search
+            rewards you with a Carl Sagan quote.
           </p>
           <div></div>
           <p className="last-paragraph">

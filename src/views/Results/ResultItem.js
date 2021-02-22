@@ -45,11 +45,13 @@ const ResultItem = (props) => {
       // Get the Google tags/labels only for a single
       // item at a time
       entries.forEach(async (entry) => {
-        console.log("intersecting: ", {
+        // Use for debug:
+        /*console.log("intersecting: ", {
           fetchTagsInitialized,
           didFindTags,
           tags,
-        });
+        });*/
+
         if (loadingTags) return;
         // If tags are already displayed in this view, then
         // we're good; we can return

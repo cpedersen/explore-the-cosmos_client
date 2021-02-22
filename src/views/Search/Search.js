@@ -404,50 +404,53 @@ class Search extends Component {
                         <label htmlFor="no-search-result-type">None</label>*/}
 
             <table>
-              <tr>
-                <td>
-                  <input
-                    type="range"
-                    name="start_date"
-                    value={this.state.start_date}
-                    min={START_DATE}
-                    max={END_DATE}
-                    id="start_date"
-                    onChange={this.updateFormState}
-                  />
-                </td>
-                <td>
-                  <label htmlFor="start_date">Start date</label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="monospace">{this.state.start_date}</span>
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <input
-                    type="range"
-                    name="end_date"
-                    value={this.state.end_date}
-                    min={START_DATE}
-                    max={END_DATE}
-                    id="end_date"
-                    onChange={this.updateFormState}
-                  />
-                </td>
-                <td>
-                  <label htmlFor="end_date">End date</label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="monospace">{this.state.end_date}</span>
-                </td>
-                <td></td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>
+                    <input
+                      type="range"
+                      name="start_date"
+                      value={this.state.start_date}
+                      min={START_DATE}
+                      max={END_DATE}
+                      id="start_date"
+                      onChange={this.updateFormState}
+                    />
+                  </td>
+                  <td>
+                    <label htmlFor="start_date">Start date</label>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <span className="monospace">{this.state.start_date}</span>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <input
+                      type="range"
+                      name="end_date"
+                      value={this.state.end_date}
+                      min={START_DATE}
+                      max={END_DATE}
+                      id="end_date"
+                      onChange={this.updateFormState}
+                    />
+                  </td>
+                  <td>
+                    <label htmlFor="end_date">End date</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span className="monospace">{this.state.end_date}</span>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
             </table>
 
             {parseInt(this.state.start_date) > parseInt(this.state.end_date) ? (
