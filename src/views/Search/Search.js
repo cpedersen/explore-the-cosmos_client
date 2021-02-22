@@ -24,6 +24,7 @@ class Search extends Component {
     error: null,
     loading: false,
     page: 1,
+    numOfPages: 1,
     limitReached: false,
     keywords: {},
     searchInitialised: false,
@@ -266,6 +267,7 @@ class Search extends Component {
       });
       this.setState({
         loading: false,
+        numOfPages: this.getPageCount(this.context.total_hits),
       });
     } catch (error) {
       console.error("error: ", error);
@@ -311,13 +313,13 @@ class Search extends Component {
     this.initSearch(prevPage);
   };
 
-  // May end up using this:
-  // Count the number of pages to display (denominator = results/page)
-  /*getPagesCount = (total, denominator) => {
+  // Count the number of pages to display (denominator = 100 items/page,
+  // total = total_hits)
+  getPageCount = (total, denominator = 100) => {
     const divisible = total % denominator === 0;
     const valueToBeAdded = divisible ? 0 : 1;
     return Math.floor(total / denominator) + valueToBeAdded;
-  };*/
+  };
 
   resetForm = (e) => {
     // Reset button sets search params and pagination
@@ -329,6 +331,7 @@ class Search extends Component {
     // Go back to default settings
     this.setState({
       page: 1,
+      numOfPages: 1,
       start_date: START_DATE,
       end_date: END_DATE,
       keywords: {},
@@ -361,6 +364,7 @@ class Search extends Component {
     // If search results found, then render them; otherwise render null
     // If search has been done, then display a new quote
     //console.log("this in search: ", this);
+
     return (
       <div className="container-search">
         <nav className="navbar">
@@ -489,7 +493,9 @@ class Search extends Component {
               ) : (
                 <span></span>
               )}
-              <span className="page-num">{this.state.page}</span>
+              <span className="page-num">
+                {this.state.page} of {this.state.numOfPages}
+              </span>
 
               {!this.state.limitReached ? (
                 <button onClick={this.onNextPage}>Next</button>
