@@ -486,7 +486,7 @@ class Search extends Component {
               ) : (
                 <span></span>
               )}
-              <span>{this.state.page}</span>
+              <span className="page-num">{this.state.page}</span>
 
               {!this.state.limitReached ? (
                 <button onClick={this.onNextPage}>Next</button>

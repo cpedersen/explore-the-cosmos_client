@@ -85,7 +85,8 @@ class About extends Component {
             </a>
             . Almost 185,000 images are currently searchable using text or NASA
             keywords. In this Explore the Cosmos tool, one hundred images are
-            displayed per page of results.{" "}
+            displayed per page of results. (Note that Prev and Next buttons in
+            the footer may take a few moments to load.){" "}
             <a
               target="_blank"
               rel="noreferrer"

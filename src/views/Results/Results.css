@@ -62,7 +62,10 @@ body {
 .footer-results {
   flex-shrink: 0;
   color: black;
-  
+}
+
+.page-num {
+  margin: auto;
 }
 
 .item-result-image {
