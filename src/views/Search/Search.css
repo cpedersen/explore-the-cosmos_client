@@ -97,9 +97,13 @@ button,
   text-align: center;
 }
 
-.keywords-section {
+.keywords-header {
   margin-top: 2px;
   margin-bottom: 2px;
+}
+
+.keywords-section {
+  margin-bottom: 6px;
 }
 
 .tag {
@@ -109,7 +113,7 @@ button,
   background: #a9a9a9;
   display: inline-block;
   text-align: center;
-  margin: 0em;
+  margin: 0em 0em 0em 0em;
   font: 400 13.3333px Arial;
 }
 

@@ -21,8 +21,8 @@ const Keywords = (props) => {
   }, [keywords]);
 
   return activeKeywords.length ? (
-    <div>
-      <span className="keywords-section">Keywords:</span>
+    <div className="keywords-section">
+      <span className="keywords-header">Keywords:</span>
       <br />
       {activeKeywords.map((keyword) => {
         return (
