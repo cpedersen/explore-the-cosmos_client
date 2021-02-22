@@ -28,11 +28,13 @@ const ResultItem = (props) => {
   const containerRef = useRef(null);
   // Establishes that there are tags displayed to start
   const fetchTagsInitialized = useRef(false);
+  const didFindTags = useRef(false);
 
   // Get the Google tags after the Search render
   // We need useEffect hook to handle tracking of items
   // through viewport
   useEffect(() => {
+    //console.log("connected: ", nasa_id);
     // Set the observer of the target
     let observer = null;
     // Declare options in case we need
@@ -43,18 +45,33 @@ const ResultItem = (props) => {
       // Get the Google tags/labels only for a single
       // item at a time
       entries.forEach(async (entry) => {
+        console.log("intersecting: ", {
+          fetchTagsInitialized,
+          didFindTags,
+          tags,
+        });
+        if (loadingTags) return;
         // If tags are already displayed in this view, then
         // we're good; we can return
-        if (fetchTagsInitialized.current) return;
+        if (fetchTagsInitialized.current && didFindTags.current && tags?.length)
+          return;
         // Otherwise, load tags and wait to complete; try
         // to disconnect the observer (don't worry if it
         // isn't a clean disconnect)
         if (entry.isIntersecting) {
           setLoadingTags(true);
           fetchTagsInitialized.current = true;
-          await fetchVisionTags(nasa_id, item.links?.[0].href);
+          const imageTags = await fetchVisionTags(
+            nasa_id,
+            item.links?.[0].href
+          );
+          //console.log("found tags?: ", imageTags);
+          if (imageTags.length) {
+            didFindTags.current = true;
+          }
           setLoadingTags(false);
-          observer?.disconnect();
+          //console.log("done, disconnecting: ", nasa_id);
+          // observer?.disconnect();
         }
       });
     };
@@ -67,9 +84,10 @@ const ResultItem = (props) => {
 
     return () => {
       // Don't error out if we can't cleanly disconnect
+      //console.log("disconnected: ", nasa_id);
       observer?.disconnect();
     };
-  }, [containerRef.current]);
+  }, [containerRef.current, tags]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //console.log("keywords: ", props.keywords);
 
@@ -101,7 +119,10 @@ const ResultItem = (props) => {
                   })}
                   key={index}
                 >
-                  <a onClick={(e) => onTagClick(e, keyword)} key={index}>
+                  <a // eslint-disable-line  jsx-a11y/anchor-is-valid
+                    onClick={(e) => onTagClick(e, keyword)}
+                    key={index}
+                  >
                     <span>{keyword}</span>
                   </a>
                 </button>
@@ -119,11 +140,11 @@ const ResultItem = (props) => {
                     <button
                       className={getClassNames({
                         "single-vision-tag": true,
-                        selected: false,
+                        selected: Boolean((props.keywords || {})[description]),
                       })}
                       key={`${score}-${index}`}
                     >
-                      <a
+                      <a // eslint-disable-line  jsx-a11y/anchor-is-valid
                         onClick={(e) => onTagClick(e, description)}
                         key={`${description}-${index}`}
                       >

@@ -18,41 +18,51 @@ class About extends Component {
         <div className="about-text">
           <h2>Explore the Cosmos with Carl Sagan</h2>
           <p>
-            <a target="_blank" href="https://en.wikipedia.org/wiki/Carl_Sagan">
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="https://en.wikipedia.org/wiki/Carl_Sagan"
+            >
               Carl Sagan
             </a>{" "}
             was an American astronomer, who captivated audiences with his{" "}
             <a
               target="_blank"
+              rel="noreferrer"
               href="https://en.wikipedia.org/wiki/Cosmos:_A_Personal_Voyage"
             >
               Cosmos
             </a>{" "}
             TV series in 1980. He was the face of science in America, reminding
-            us again and again that we are but a granular part of the universe,
-            and encouraging us to explore who we are by learning where we came
-            from.{" "}
+            us that we are but a granular part of the universe and encouraging
+            us to explore who we are by learning where we came from.{" "}
             <a
               target="_blank"
+              rel="noreferrer"
               href="https://www.youtube.com/watch?v=PPTnuUcUVVY"
             >
               "We are made of starstuff,"
             </a>{" "}
-            he would say with characteristic boyish enthusiasm.
+            he said with characteristic boyish enthusiasm.
           </p>
           <p>
             Sagan played a leading role in the American space program from its
             inception. He was an adviser to the{" "}
-            <a target="_blank" href="https://en.wikipedia.org/wiki/NASA">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://en.wikipedia.org/wiki/NASA"
+            >
               National Aeronautics and Space Administration (NASA)
             </a>{" "}
             starting in 1958, when NASA was formed. NASA awarded him with medals
-            for both his scientific achievement and public service educating
-            citizens. NASA has always tried to engage the public in its efforts
+            for both his scientific achievement and public service in educating
+            the citizenry. NASA always tried to engage the public in its efforts
             to collect data about the solar system and the universe. Indeed,
             NASA's pictures are{" "}
             <a
               target="_blank"
+              rel="noreferrer"
               href="https://www.nasa.gov/multimedia/guidelines/index.html"
             >
               legally in the public domain
@@ -61,12 +71,16 @@ class About extends Component {
           </p>
           <p>
             As part of its educational effort, NASA developed{" "}
-            <a target="_blank" href="https://api.nasa.gov/">
+            <a target="_blank" rel="noreferrer" href="https://api.nasa.gov/">
               {" "}
               APIs
             </a>{" "}
             intended to make NASA's data, including imagery,{" "}
-            <a target="_blank" href="https://sti.nasa.gov/for-developers/">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://sti.nasa.gov/for-developers/"
+            >
               "eminently accessible"
             </a>
             . Almost 185,000 images are currently searchable using text or NASA
@@ -74,6 +88,7 @@ class About extends Component {
             displayed per page of results.{" "}
             <a
               target="_blank"
+              rel="noreferrer"
               href="https://cloud.google.com/vision/docs/labels"
             >
               Google Vision API labels

@@ -11,6 +11,9 @@ class Description extends Component {
   };
 
   componentDidMount() {
+    // Make sure that the item description page is scrolled
+    // to the top of the page, regardless of where user is
+    // on the Search page
     window.scrollTo(0, 0);
 
     const SEARCH_URL = `${config.NASA_API_ENDPOINT}?nasa_id=${this.props.match.params.nasa_id}`;
@@ -20,7 +23,7 @@ class Description extends Component {
       error: null,
     });
 
-    //Fetch the item search data
+    // Fetch the item search data
     fetch(SEARCH_URL, {
       method: "GET",
       headers: {
@@ -31,7 +34,7 @@ class Description extends Component {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("result: ", result);
+        //console.log("result: ", result);
         const item = {
           ...result.collection.items[0].data[0],
           image: result.collection.items[0].links[0].href,
@@ -78,7 +81,7 @@ class Description extends Component {
           <ul>
             <li>
               <b>URL: </b>{" "}
-              <a target="_blank" href={image}>
+              <a rel="noreferrer" target="_blank" href={image}>
                 {image}
               </a>
             </li>

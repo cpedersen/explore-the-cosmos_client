@@ -179,7 +179,7 @@ class Search extends Component {
   fetchVisionTags = async (nasa_id, image) => {
     //console.log("in fetch vision", nasa_id, image);
     const taggedResponse = await fetch(
-      "http://localhost:8000/api/vision/tag-images",
+      `${process.env.REACT_APP_BASE_URL}/api/vision/tag-images`,
       {
         method: "post",
         headers: {
@@ -192,10 +192,12 @@ class Search extends Component {
     const taggedResults = await taggedResponse.json();
     const { tags } = taggedResults;
     const imageTags = tags?.[0];
+    //console.log("image tags: ", imageTags);
     const searchResults = this.context.searchResults.map((item) => {
       const result = item.data[0];
       if (result.nasa_id === nasa_id) {
         const clonedItem = JSON.parse(JSON.stringify(item));
+        //console.log("matched item: ", nasa_id, clonedItem);
         clonedItem.data[0].tags = imageTags;
         return clonedItem;
       }
@@ -203,6 +205,7 @@ class Search extends Component {
     });
 
     this.context.setResults(searchResults);
+    return imageTags;
   };
 
   initSearch = async (page) => {
@@ -265,7 +268,7 @@ class Search extends Component {
         loading: false,
       });
     } catch (error) {
-      console.error("Error: ", error);
+      console.error("error: ", error);
       this.setState({
         error: error.message,
         loading: false,
@@ -361,13 +364,13 @@ class Search extends Component {
     return (
       <div className="container-search">
         <nav className="navbar">
-          <Link to="/" target="_blank" className="link">
+          <Link to="/" target="_blank" rel="noreferrer" className="link">
             Home
           </Link>
-          <Link to="/search" target="_blank" className="link">
+          <Link to="/search" target="_blank" rel="noreferrer" className="link">
             Search
           </Link>
-          <Link to="/about" target="_blank" className="link">
+          <Link to="/about" target="_blank" rel="noreferrer" className="link">
             About
           </Link>
         </nav>

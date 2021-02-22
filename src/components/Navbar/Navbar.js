@@ -10,7 +10,12 @@ class Navbar extends Component {
           <Link to="/" className="home-link">
             Home
           </Link>
-          <Link to="/search" target="_blank" className="search-link">
+          <Link
+            to="/search"
+            rel="noreferrer"
+            target="_blank"
+            className="search-link"
+          >
             Search
           </Link>
           <Link to="/about" className="about-link">

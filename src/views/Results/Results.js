@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Results.css";
 import ResultItem from "./ResultItem";
-import Keywords from "../Search/Keywords";
 
 class Results extends Component {
   onTagClick = (e, keyword) => {
