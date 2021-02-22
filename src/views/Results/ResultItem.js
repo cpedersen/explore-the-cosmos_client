@@ -76,7 +76,7 @@ const ResultItem = (props) => {
   return (
     <div ref={containerRef} className="item-result" key={nasa_id}>
       <div className="item">
-        <b>NASA ID: </b>
+        <b>Title: </b>
         {title}
       </div>
       <div>

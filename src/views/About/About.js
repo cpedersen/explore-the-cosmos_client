@@ -86,6 +86,7 @@ class About extends Component {
             label yet again. In addition, every search rewards you with a new
             Carl Sagan quote.
           </p>
+          <div></div>
           <p className="last-paragraph">
             <em>
               <b>

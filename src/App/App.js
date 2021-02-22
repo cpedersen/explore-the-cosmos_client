@@ -8,6 +8,7 @@ import Results from "../views/Results/Results";
 import Description from "../views/Description/Description";
 import About from "../views/About/About";
 import RandomQuote from "../views/RandomQuote/RandomQuote";
+import { BrowserRouter } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -17,7 +18,6 @@ class App extends Component {
     quote: "",
   };
 
-  // TODO: why isn't total_hits set to something?
   onSearchResults = ({ results, total_hits }) => {
     this.setState({
       searchResults: results,
@@ -54,24 +54,26 @@ class App extends Component {
     };
 
     return (
-      <main className="App">
-        <SearchContext.Provider value={contextValue}>
-          <div className="content" aria-live="polite">
-            <Switch>
-              <Route exact path="/" component={Homepage} />
-              <Route exact path="/search" component={Search} />
-              <Route exact path="/results" component={Results} />
-              <Route exact path="/quote" component={RandomQuote} />
-              <Route
-                exact
-                path="/description/:nasa_id"
-                component={Description}
-              />
-              <Route exact path="/about" component={About} />
-            </Switch>
-          </div>
-        </SearchContext.Provider>
-      </main>
+      <BrowserRouter>
+        <main className="App">
+          <SearchContext.Provider value={contextValue}>
+            <div className="content" aria-live="polite">
+              <Switch>
+                <Route exact path="/" component={Homepage} />
+                <Route exact path="/search" component={Search} />
+                <Route exact path="/results" component={Results} />
+                <Route exact path="/quote" component={RandomQuote} />
+                <Route
+                  exact
+                  path="/description/:nasa_id"
+                  component={Description}
+                />
+                <Route exact path="/about" component={About} />
+              </Switch>
+            </div>
+          </SearchContext.Provider>
+        </main>
+      </BrowserRouter>
     );
   }
 }
