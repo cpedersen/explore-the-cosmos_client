@@ -55,11 +55,12 @@ class About extends Component {
             >
               National Aeronautics and Space Administration (NASA)
             </a>{" "}
-            starting in 1958, when NASA was formed. NASA awarded him with medals
-            for both his scientific achievement and public service in educating
-            the citizenry. NASA always tried to engage the public in its efforts
-            to collect data about the solar system and the universe. Indeed,
-            NASA's pictures are{" "}
+            starting in 1958, when NASA was formed. NASA awarded Sagan for both
+            his scientific achievement and public service in educating the
+            citizenry. NASA has always tried to engage the public in its efforts
+            to collect data about the solar system and the universe, and about
+            the development of its sophisticated technology to enable the space
+            program. Indeed, NASA's pictures are{" "}
             <a
               target="_blank"
               rel="noreferrer"
@@ -67,7 +68,9 @@ class About extends Component {
             >
               legally in the public domain
             </a>
-            .
+            . Before NASA, there was NACA, or the National Advisory Committee
+            for Aeronautics, which was formed in 1915 to direct the scientific
+            study of flight.
           </p>
           <p>
             As part of its educational effort, NASA developed{" "}
@@ -83,9 +86,11 @@ class About extends Component {
             >
               "eminently accessible"
             </a>
-            . Almost 185,000 images are currently searchable using text or NASA
-            keywords. In this Explore the Cosmos tool, one hundred images are
-            displayed per page of results.{" "}
+            . In this Explore the Cosmos tool, you can search almost 185,000
+            NASA images using text or NASA keywords. One hundred images are
+            displayed per page of results. A date range tool enables images to
+            be displayed from as far back as 1920, when the field of aeronautics
+            was in its infancy.{" "}
             <a
               target="_blank"
               rel="noreferrer"
@@ -93,14 +98,19 @@ class About extends Component {
             >
               Google Vision API labels
             </a>{" "}
-            are provided to further inspire your searches. (Note that the Google
+            are provided to further inspire your searches.{" "}
+            {/*(Note that the Google
             labels and Prev/Next buttons in the footer may take a few moments to
-            load.) New searches are performed using the NASA API's keyword field
-            when a NASA keyword or Google label are selected. The keyword or
-            label can be de-selected either by selecting the 'x' in the search
-            criteria section at the top of the Search page, or by selecting the
-            highlighted keyword or label yet again. In addition, every search
-            rewards you with a Carl Sagan quote.
+            load.)*/}{" "}
+            New searches can be performed using the NASA API's keyword field, as
+            soon as a NASA keyword or Google label are selected{" "}
+            {/*(selecting the
+            Submit button is not necessary when selecting keywords or labels)*/}
+            . The NASA keyword or Google label can be de-selected either by
+            selecting the 'x' in the search criteria section at the top of the
+            Search page, or by selecting the highlighted keyword or label yet
+            again. In addition, every search rewards you with a Carl Sagan
+            quote.
           </p>
           <div></div>
           <p className="last-paragraph">

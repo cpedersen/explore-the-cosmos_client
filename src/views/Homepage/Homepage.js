@@ -19,7 +19,8 @@ class Homepage extends Component {
           <RandomQuote />
           <div className="intro-description">
             <p>
-              Trace the origins of our knowledge and the scientific method.
+              {/*Trace the origins of our knowledge and the scientific method.*/}
+              Trace one hundred years of our knowledge about space travel.
               Explore 15 billion years of cosmic evolution.
             </p>
             <p>Click the button below to get started...</p>
