@@ -393,7 +393,7 @@ class Search extends Component {
               value={this.context.query || ""}
               name="query"
               id="search"
-              placeholder="Mars Perseverance"
+              placeholder="Perseverance"
               onChange={this.onQueryChange}
             />
             {/*<input type="radio" checked={this.state.resultsType === 'most-recent'} value="most-recent" name="resultsType" id="recent" onChange={this.updateFormState}/> 
