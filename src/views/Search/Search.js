@@ -25,7 +25,7 @@ class Search extends Component {
     loading: false,
     page: 1,
     numOfPages: 1,
-    limitReached: false,
+    //limitReached: false,
     keywords: {},
     searchInitialised: false,
     didMount: false,
@@ -255,11 +255,11 @@ class Search extends Component {
 
       const result = await response.json();
       //console.log("NASA results: ", result);
-      if (result.collection.items?.length < 100) {
+      /*if (result.collection.items?.length < 100) {
         this.setState({
           limitReached: true,
         });
-      }
+      }*/
 
       this.context.onSearchResults({
         results: result.collection.items,
@@ -297,7 +297,7 @@ class Search extends Component {
   onNextPage = (e) => {
     // Track pagination for Next
     e.preventDefault();
-    if (this.state.limitReached) return;
+    //if (this.state.limitReached) return;
     const nextPage = this.state.page + 1;
     this.setState({
       page: nextPage,
@@ -309,7 +309,9 @@ class Search extends Component {
     // Track pagination for Previous
     e.preventDefault();
     const prevPage = this.state.page === 1 ? 1 : this.state.page - 1;
-    this.setState({ page: prevPage });
+    this.setState({
+      page: prevPage,
+    });
     this.initSearch(prevPage);
   };
 
@@ -497,7 +499,7 @@ class Search extends Component {
                 {this.state.page} of {this.state.numOfPages}
               </span>
 
-              {!this.state.limitReached ? (
+              {this.state.page !== this.state.numOfPages ? (
                 <button onClick={this.onNextPage}>Next</button>
               ) : (
                 <span></span>

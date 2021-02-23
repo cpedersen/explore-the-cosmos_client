@@ -23,7 +23,7 @@ class RandomQuote extends Component {
     return (
       <div className="container-quote">
         {loading ? (
-          "Loading..."
+          <div className="container-loading">Loading...</div>
         ) : (
           <figure>
             <blockquote>"{quote.content}"</blockquote>
