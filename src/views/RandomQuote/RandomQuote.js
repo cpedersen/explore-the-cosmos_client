@@ -7,7 +7,7 @@ class RandomQuote extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:8000/api/quote")
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/quote`)
       .then((res) => res.json())
       .then((quote) => {
         this.setState({
