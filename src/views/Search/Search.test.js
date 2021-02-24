@@ -1,3 +1,17 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import Search from "./Search";
+import ShallowRenderer from "react-test-renderer/shallow";
+
+it("renders without crashing", () => {
+  const renderer = new ShallowRenderer();
+  renderer.render(<Search />);
+  const result = renderer.getRenderOutput();
+  expect(result.type).toBe("div");
+});
+
 /*import React from "react";
 import ReactDOM from "react-dom";
 import "@testing-library/jest-dom";
