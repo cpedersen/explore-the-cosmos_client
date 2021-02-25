@@ -180,7 +180,7 @@ class Search extends Component {
   fetchVisionTags = async (nasa_id, image) => {
     //console.log("in fetch vision", nasa_id, image);
     const taggedResponse = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/vision/tag-images`,
+      `${config.REACT_APP_BASE_URL}/api/vision/tag-images`,
       {
         method: "post",
         headers: {

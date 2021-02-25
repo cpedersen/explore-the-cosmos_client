@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./RandomQuote.css";
+import config from "../../config";
 
 class RandomQuote extends Component {
   state = {
@@ -7,7 +8,7 @@ class RandomQuote extends Component {
   };
 
   componentDidMount() {
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/quote`)
+    fetch(`${config.REACT_APP_BASE_URL}/api/quote`)
       .then((res) => res.json())
       .then((quote) => {
         this.setState({
