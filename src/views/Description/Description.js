@@ -32,7 +32,6 @@ class Description extends Component {
         "Access-Control-Allow-Origin": "*",
       },
       mode: "cors",
-      //type: "cors",
     })
       .then((response) => response.json())
       .then((result) => {

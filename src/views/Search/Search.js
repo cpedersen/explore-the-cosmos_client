@@ -250,7 +250,7 @@ class Search extends Component {
           "Content-Type": "application/json",
           Authorization: `Bearer ${config.NASA_API_KEY}`,
         },
-        type: "cors",
+        mode: "cors",
       });
 
       const result = await response.json();
