@@ -10,7 +10,8 @@ const REACT_APP_BASE_URL =
 const config = {
   NASA_API_ENDPOINT,
   NASA_API_KEY,
-  REACT_APP_BASE_URL,
+  REACT_APP_BASE_URL:
+    REACT_APP_BASE_URL || "https://stormy-citadel-96294.herokuapp.com",
 };
 
 export default config;
