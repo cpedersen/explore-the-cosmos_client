@@ -29,9 +29,8 @@ class Description extends Component {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${config.NASA_API_KEY}`,
-        "Access-Control-Allow-Origin": "*",
       },
-      mode: "cors",
+      type: "cors",
     })
       .then((response) => response.json())
       .then((result) => {
