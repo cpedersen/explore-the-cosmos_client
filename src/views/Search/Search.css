@@ -86,6 +86,7 @@ button,
 .submitButton {
   font-size: 16px;
   margin: 2px;
+  cursor: pointer;
 }
 
 /*button:active,
