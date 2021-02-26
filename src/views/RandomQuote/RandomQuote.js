@@ -10,6 +10,11 @@ class RandomQuote extends Component {
   componentDidMount() {
     fetch(`${config.REACT_APP_BASE_URL}/api/quote`, {
       mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
     })
       .then((res) => res.json())
       .then((quote) => {
