@@ -87,10 +87,10 @@ class About extends Component {
               "eminently accessible"
             </a>
             . In this Explore the Cosmos tool, you can search almost 185,000
-            NASA images using text or NASA keywords. One hundred images are
-            displayed per page of results. A date range tool enables images to
-            be displayed from as far back as 1920, when the field of aeronautics
-            was in its infancy.{" "}
+            NASA images using your own text or NASA keywords provided with the
+            NASA API. One hundred images are displayed per page of results. A
+            date range tool enables images to be displayed from as far back as
+            1920, when the field of aeronautics was in its infancy.{" "}
             <a
               target="_blank"
               rel="noreferrer"
@@ -98,19 +98,21 @@ class About extends Component {
             >
               Google Vision API labels
             </a>{" "}
-            are provided to further inspire your searches.{" "}
+            are also provided to further inspire your searches (though Google
+            labels do not guarantee a successful result in the same way that
+            NASA tags do).{" "}
             {/*(Note that the Google
             labels and Prev/Next buttons in the footer may take a few moments to
             load.)*/}{" "}
-            New searches can be performed using the NASA API's keyword field, as
-            soon as a NASA keyword or Google label are selected{" "}
+            When a NASA keyword or Google label are selected, a new search is
+            performed, overwriting the previous search results.{" "}
             {/*(selecting the
             Submit button is not necessary when selecting keywords or labels)*/}
-            . The NASA keyword or Google label can be de-selected either by
+            NASA keywords and Google labels can in turn be de-selected either by
             selecting the 'x' in the search criteria section at the top of the
             Search page, or by selecting the highlighted keyword or label yet
-            again. In addition, every search rewards you with a Carl Sagan
-            quote.
+            again. In addition, every successful search rewards you with a new
+            Carl Sagan quote.
           </p>
           <div></div>
           <p className="last-paragraph">
