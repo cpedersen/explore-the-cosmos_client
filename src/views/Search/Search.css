@@ -50,21 +50,24 @@ form button {
   text-shadow: 1px 1px 1px white;
   transition: 0.5s;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 form input[type="submit"]:hover,
 form button:hover {
   transform: translateY(-3px);
   box-shadow: 0 2px 2px -2px black;
+  border-radius: 3px;
 }
 
 form input[type="submit"]:active,
 form button:active {
   background: yellow;
+  border-radius: 3px;
 }
 
 form button:active {
-  /*border-radius: 3px;*/
+  border-radius: 3px;
 }
 
 button,
@@ -73,13 +76,13 @@ button,
   font-size: 16px;
   margin: 2px;
   cursor: pointer;
-  /*border-radius: 3px;*/
+  border-radius: 3px;
 }
 
 input[type="search"] {
   font-size: medium;
   padding: 3px 5px;
-  /*border-radius: 3px;*/
+  border-radius: 3px;
   border: 1px solid #eee;
 }
 
