@@ -68,7 +68,6 @@ button,
   font-size: 16px;
   margin: 2px;
   cursor: pointer;
-  border-radius: 3px;
 }
 
 input[type="search"] {
