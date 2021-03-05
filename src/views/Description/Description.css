@@ -6,6 +6,15 @@
   justify-content: space-between;
 }
 
+button {
+  border: none;
+  background: #d3d3d3;
+}
+
+button:active {
+  background: #d3d3d3;
+}
+
 .link {
   color: #001a5b;
   margin-top: 5px;
@@ -22,6 +31,7 @@ li {
   padding-bottom: 2px;
   padding-top: 2px;
 }
+
 .item-description {
   text-align: left;
   vertical-align: center;
