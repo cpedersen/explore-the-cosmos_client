@@ -13,7 +13,9 @@ class About extends Component {
           <Link to="/search" className="link">
             Search
           </Link>
-          <Link to="" className="no-link"></Link>
+          <Link to="/about" className="no-link">
+            About
+          </Link>
         </nav>
         <div className="about-text">
           <h2>Explore the Cosmos with Carl Sagan</h2>

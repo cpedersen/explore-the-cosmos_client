@@ -17,10 +17,16 @@ nav {
   color: #001a5b;
   margin-top: 5px;
   margin-bottom: 5px;
-  margin-right: 5px;
   text-decoration: none;
   /*font-family: "Impact";*/
-  font-family: Georgia, Times, Times New Roman, serif;
+}
+
+.no-link {
+  background: #d3d3d3;
+  color: #d3d3d3;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: auto;
 }
 
 h2 {
