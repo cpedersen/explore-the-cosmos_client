@@ -63,18 +63,19 @@ form button:active {
   background: yellow;
 }
 
-input[type="search"] {
-  font-size: medium;
-  padding: 3px 5px;
-  border-radius: 3px;
-  border: 1px solid #eee;
-}
-
 button,
 .submitButton {
   font-size: 16px;
   margin: 2px;
   cursor: pointer;
+  border-radius: 3px;
+}
+
+input[type="search"] {
+  font-size: medium;
+  padding: 3px 5px;
+  border-radius: 3px;
+  border: 1px solid #eee;
 }
 
 .search-criteria-form {
