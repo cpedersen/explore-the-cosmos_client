@@ -476,7 +476,9 @@ class Search extends Component {
               value={this.state.loading ? "Submitting" : "Submit"}
               disabled={this.state.loading}
             />
-            <button onClick={this.resetForm}>Reset</button>
+            <button className="resetButton" onClick={this.resetForm}>
+              Reset
+            </button>
           </form>
         </div>
         <>
