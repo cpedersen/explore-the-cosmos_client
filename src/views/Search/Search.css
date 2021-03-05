@@ -42,6 +42,15 @@ label {
   margin: 10% 20%;
 }
 
+button,
+.submitButton,
+.resetButton {
+  font-size: 16px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
 form input[type="submit"],
 form button {
   padding: 4px 10px;
@@ -66,18 +75,9 @@ form button:active {
   border-radius: 3px;
 }
 
-form button:active {
+/*form button:active {
   border-radius: 3px;
-}
-
-button,
-.submitButton,
-.resetButton {
-  font-size: 16px;
-  margin: 2px;
-  cursor: pointer;
-  border-radius: 3px;
-}
+}*/
 
 input[type="search"] {
   font-size: medium;

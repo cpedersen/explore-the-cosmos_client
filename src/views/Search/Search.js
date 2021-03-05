@@ -529,12 +529,13 @@ class Search extends Component {
               removeKeyword={this.removeKeyword}
             />
 
-            <input
+            <button
               className="submitButton"
               type="submit"
-              value={this.state.loading ? "Submitting" : "Submit"}
               disabled={this.state.loading}
-            />
+            >
+              {this.state.loading ? "Submitting" : "Submit"}
+            </button>
             <button className="resetButton" onClick={this.resetForm}>
               Reset
             </button>
