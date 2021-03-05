@@ -7,6 +7,7 @@ class Results extends Component {
     e.preventDefault();
     this.props.onTagClick(keyword);
   };
+
   render() {
     //console.log("this in results: ", this);
     const {

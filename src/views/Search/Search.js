@@ -315,9 +315,9 @@ class Search extends Component {
     this.initSearch(prevPage);
   };
 
-  // Count the number of pages to display (denominator = 100 items/page,
-  // total = total_hits)
   getPageCount = (total, denominator = 100) => {
+    // Count the number of pages to display (denominator = 100 items/page,
+    // total = total_hits)
     const divisible = total % denominator === 0;
     const valueToBeAdded = divisible ? 0 : 1;
     return Math.floor(total / denominator) + valueToBeAdded;
@@ -381,8 +381,13 @@ class Search extends Component {
           </Link>
         </nav>
 
+        {/* Only display a quote when there are results */}
         <div className="search-criteria">
-          {this.state.newSearch ? <RandomQuote /> : <span></span>}
+          {this.state.newSearch && this.context.total_hits > 0 ? (
+            <RandomQuote />
+          ) : (
+            <span></span>
+          )}
           {/*<!--<p className="search-criteria-intro">Enter Search Criteria:</p>-->*/}
           <form
             method="get"
