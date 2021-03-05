@@ -95,6 +95,16 @@ button,
   background: yellow;
 }*/
 
+.footer-nav-button {
+  background: #d3d3d3;
+  color: #001a5b;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  text-decoration: none;
+  border: none;
+}
+
 .no-results {
   text-align: center;
 }

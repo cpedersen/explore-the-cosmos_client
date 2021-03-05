@@ -491,7 +491,9 @@ class Search extends Component {
           {this.context.searchResults?.length ? (
             <nav className="footer-results">
               {this.state.page !== 1 ? (
-                <button onClick={this.onPrevPage}>Prev</button>
+                <button className="footer-nav-button" onClick={this.onPrevPage}>
+                  Prev
+                </button>
               ) : (
                 <span></span>
               )}
@@ -500,7 +502,9 @@ class Search extends Component {
               </span>
 
               {this.state.page !== this.state.numOfPages ? (
-                <button onClick={this.onNextPage}>Next</button>
+                <button className="footer-nav-button" onClick={this.onNextPage}>
+                  Next
+                </button>
               ) : (
                 <span></span>
               )}
