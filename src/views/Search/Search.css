@@ -109,6 +109,11 @@ label {
   border: none;
 }
 
+.footer-nav-button:active {
+  background: #d3d3d3;
+  border: none;
+}
+
 .no-results {
   text-align: center;
 }
