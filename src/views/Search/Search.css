@@ -63,6 +63,10 @@ form button:active {
   background: yellow;
 }
 
+form button:active {
+  border-radius: 3px;
+}
+
 button,
 .submitButton {
   font-size: 16px;
