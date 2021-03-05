@@ -66,6 +66,10 @@ body {
 
 .page-num {
   margin: auto;
+  color: #001a5b;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-decoration: none;
 }
 
 .item-result-image {
