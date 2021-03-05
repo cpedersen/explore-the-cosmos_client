@@ -6,7 +6,6 @@ class RandomQuote extends Component {
   state = {
     loading: true,
   };
-
   componentDidMount() {
     fetch(`${config.REACT_APP_BASE_URL}/api/quote`, {
       mode: "cors",

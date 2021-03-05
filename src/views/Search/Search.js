@@ -5,8 +5,8 @@ import config from "../../config";
 import Keywords from "./Keywords";
 import Results from "../Results/Results";
 import "./Search.css";
-import RandomQuote from "../RandomQuote/RandomQuote";
-import "../RandomQuote/RandomQuote.css";
+import SpecificQuote from "../SpecificQuote/SpecificQuote";
+import "../SpecificQuote/SpecificQuote.css";
 
 const START_DATE = 1920;
 const END_DATE = new Date().getFullYear();
@@ -18,21 +18,34 @@ class Search extends Component {
   // loading: true/false; waiting on NASA search return
   // limitReached: number of items on the page (max: 100)
   // keywords: tags passed to NASA keywords query
-  state = {
-    start_date: START_DATE,
-    end_date: END_DATE,
-    error: null,
-    loading: false,
-    page: 1,
-    numOfPages: 1,
-    //limitReached: false,
-    keywords: {},
-    searchInitialised: false,
-    didMount: false,
-    newSearch: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      start_date: START_DATE,
+      end_date: END_DATE,
+      error: null,
+      loading: false,
+      page: 1,
+      numOfPages: 1,
+      //limitReached: false,
+      keywords: {},
+      searchInitialised: false,
+      didMount: false,
+      newSearch: false,
+      quote: "",
+    };
+
+    const quotesCache = window.localStorage.getItem("quotesCache");
+
+    if (quotesCache) {
+      this.quotesCache = JSON.parse(quotesCache);
+    } else {
+      this.quotesCache = {};
+    }
+  }
 
   componentDidMount() {
+    window.addEventListener("beforeunload", this.persistQuotesCache);
     //console.log("mounted: ", this.props);
 
     const url = new URLSearchParams(this.props.location.search);
@@ -108,6 +121,19 @@ class Search extends Component {
       }
     );
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.persistQuotesCache);
+    this.persistQuotesCache();
+  }
+
+  persistQuotesCache = () => {
+    console.log("persisting quotes cache");
+    window.localStorage.setItem(
+      "quotesCache",
+      JSON.stringify(this.quotesCache)
+    );
+  };
 
   updateFormState = (e) => {
     // Update state using value inputted by the user (name is key)
@@ -209,6 +235,27 @@ class Search extends Component {
     return imageTags;
   };
 
+  fetchQuote = async (urlParams) => {
+    console.log("url params", urlParams);
+    fetch(`${config.REACT_APP_BASE_URL}/api/quote`, {
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then((res) => res.json())
+      .then((quote) => {
+        this.setState({
+          quote,
+        });
+
+        this.quotesCache[urlParams] = quote;
+        console.log("after fetch quote", quote, this.quotesCache);
+      });
+  };
+
   initSearch = async (page) => {
     // initSearch is used to track a number of things required by
     // Search: url, loading, whether new search has been triggered,
@@ -218,6 +265,13 @@ class Search extends Component {
     // the search available
     const keywordsText = this.prepareKeywordsUrlValue(this.state.keywords);
     const urlParams = `?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&keywords=${keywordsText}&page=${page}`;
+    if (Object.prototype.hasOwnProperty.call(this.quotesCache, urlParams)) {
+      this.setState({
+        quote: this.quotesCache[urlParams],
+      });
+    } else {
+      this.fetchQuote(urlParams);
+    }
     const SEARCH_URL = `${config.NASA_API_ENDPOINT}${urlParams}`;
     this.props.history.push(`${this.props.match.path}${urlParams}`);
 
@@ -383,8 +437,8 @@ class Search extends Component {
 
         {/* Only display a quote when there are results */}
         <div className="search-criteria">
-          {this.state.newSearch && this.context.total_hits > 0 ? (
-            <RandomQuote />
+          {this.context.total_hits > 0 ? (
+            <SpecificQuote quote={this.state.quote} />
           ) : (
             <span></span>
           )}
