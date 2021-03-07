@@ -147,8 +147,9 @@ label {
   background: #a9a9a9;
   display: inline-block;
   text-align: center;
-  margin: 0em 0em 0em 0em;
+  margin: 0em;
   font: 400 13.3333px Arial;
+  color: black;
 }
 
 .x-tag {
