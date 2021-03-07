@@ -128,11 +128,24 @@ class Search extends Component {
   }
 
   persistQuotesCache = () => {
-    console.log("persisting quotes cache");
+    // Quote should be persisted when user selects an item and then
+    // goes back to the search screen
+    console.log("Persisting quotes cache");
     window.localStorage.setItem(
       "quotesCache",
       JSON.stringify(this.quotesCache)
     );
+  };
+
+  //FIX1_Part1
+  clearQuotesCache = () => {
+    console.log("Clearing quote");
+    this.setState({
+      quote: "",
+    });
+    console.log("quote: ", this.state.quote);
+    /*window.localStorage.clear();*/
+    window.localStorage.removeItem("quotesCache");
   };
 
   updateFormState = (e) => {
@@ -319,6 +332,7 @@ class Search extends Component {
         results: result.collection.items,
         total_hits: result.collection.metadata.total_hits,
       });
+
       this.setState({
         loading: false,
         numOfPages: this.getPageCount(this.context.total_hits),
@@ -334,7 +348,6 @@ class Search extends Component {
       if (this.state.searchInitialised) return;
       this.setState({
         searchInitialised: true,
-        /*newSearch: true,*/
       });
     }
   };
@@ -400,6 +413,8 @@ class Search extends Component {
     this.context.setResults([]);
     // Clear url search params
     this.props.history.push("/search");
+    //FIX1_Part2
+    this.clearQuotesCache();
   };
 
   removeKeyword = (e, keyword) => {
