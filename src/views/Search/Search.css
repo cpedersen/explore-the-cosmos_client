@@ -46,9 +46,15 @@ button,
 .submitButton,
 .resetButton {
   font-size: 16px;
+  /*margin: 2px;*/
   margin: 2px;
   cursor: pointer;
   border-radius: 3px;
+}
+
+.submitButton,
+.resetButton {
+  margin: 8px;
 }
 
 form input[type="submit"],
@@ -88,11 +94,13 @@ input[type="search"] {
 
 .search-criteria-form {
   text-align: center;
-  margin-top: 40px;
+  /*margin-top: 40px;*/
+  margin-top: 10%;
 }
 
 table {
-  margin: 10px auto;
+  /*margin: 10px auto;*/
+  margin: 5% auto;
 }
 
 label {
