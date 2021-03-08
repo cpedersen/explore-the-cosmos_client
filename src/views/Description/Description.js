@@ -67,6 +67,7 @@ class Description extends Component {
 
     const readable_date = new Date(date_created).toDateString();
 
+    // FIX2_Part2 - persist quote on line 75?
     return (
       <div className="container-description">
         <nav className="navbar">

@@ -6,9 +6,11 @@ const Keywords = (props) => {
   const [activeKeywords, setActiveKeywords] = useState([]);
 
   useEffect(() => {
-    //console.log("keywords: ", keywords);
     // Loop through keywords and create a new array
     // with only active keywords
+
+    //console.log("keywords: ", keywords);
+
     const newActiveKeywords = Object.entries(keywords).reduce(
       (acc, [keyword, isActive]) => {
         if (!isActive) return acc;

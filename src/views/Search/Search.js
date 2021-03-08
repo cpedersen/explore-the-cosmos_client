@@ -16,7 +16,6 @@ class Search extends Component {
 
   // start_date & end_date: start year & end year
   // loading: true/false; waiting on NASA search return
-  // limitReached: number of items on the page (max: 100)
   // keywords: tags passed to NASA keywords query
   constructor() {
     super();
@@ -27,7 +26,6 @@ class Search extends Component {
       loading: false,
       page: 1,
       numOfPages: 1,
-      //limitReached: false,
       keywords: {},
       searchInitialised: false,
       didMount: false,
@@ -35,6 +33,7 @@ class Search extends Component {
       quote: "",
     };
 
+    // Save quote using localStorage
     const quotesCache = window.localStorage.getItem("quotesCache");
 
     if (quotesCache) {
@@ -45,18 +44,24 @@ class Search extends Component {
   }
 
   componentDidMount() {
+    // Persist the quote when the component finishes rendering.
     window.addEventListener("beforeunload", this.persistQuotesCache);
+
     //console.log("mounted: ", this.props);
 
+    // Get the url
     const url = new URLSearchParams(this.props.location.search);
 
     // Get the query that the user inputted; if no query
-    // found, the query is empty
+    // found, the query is null
     const query = url.get("q") || "";
     //console.log("q: ", query);
 
     // Get tags/keywords selected by user
     const keywordsText = url.get("keywords: ") || "";
+
+    // FIX2_Part1 - Add persist of quote, if tags selected
+
     //console.log("keywords text: ", keywordsText);
 
     // If found, separate keywords using a pipe since pipe
@@ -100,7 +105,8 @@ class Search extends Component {
     }
 
     // This setting is in case we want to generate random quotes
-    // everytime the page is loaded (same as Homepage)
+    // every time the page is loaded (same as Homepage); for now
+    // this is unused
     this.setState({ didMount: true });
 
     // Default settings found, so we need to 1) pass to state an object
@@ -123,13 +129,16 @@ class Search extends Component {
   }
 
   componentWillUnmount() {
+    // Persist the quote before unmounting
+    // FIX2_Part4 - is this correct?
     window.removeEventListener("beforeunload", this.persistQuotesCache);
+    // Have to set this again to make sure we have the specific quote:
     this.persistQuotesCache();
   }
 
   persistQuotesCache = () => {
-    // Quote should be persisted when user selects an item and then
-    // goes back to the search screen
+    // Quote should be persisted when a user selects an item to get the
+    // description, then selects Go Back
     console.log("Persisting quotes cache");
     window.localStorage.setItem(
       "quotesCache",
@@ -139,12 +148,12 @@ class Search extends Component {
 
   //FIX1_Part1
   clearQuotesCache = () => {
+    // Quote should be cleared when user selects Reset
     console.log("Clearing quote");
     this.setState({
       quote: "",
     });
     console.log("quote: ", this.state.quote);
-    /*window.localStorage.clear();*/
     window.localStorage.removeItem("quotesCache");
   };
 
@@ -165,6 +174,8 @@ class Search extends Component {
     this.setState({
       newSearch: true,
     });
+
+    // FIX2_Part3 - persist quote here?
 
     // Don't allow the user to add the same tag twice to the list of
     // keywords used in the query
@@ -203,6 +214,8 @@ class Search extends Component {
   };
 
   prepareKeywordsUrlValue = (keywords) => {
+    // Put together the url when the user selects a
+    // NASA keyword or Google label
     if (this.state.keywords) {
       return Object.entries(keywords)
         .reduce((acc, [keyword, isActive]) => {
@@ -215,8 +228,10 @@ class Search extends Component {
     }
   };
 
-  // Use async to return a promise
   fetchVisionTags = async (nasa_id, image) => {
+    // Get the Google Vision labels using an async
+    // function
+
     //console.log("in fetch vision", nasa_id, image);
     const taggedResponse = await fetch(
       `${config.REACT_APP_BASE_URL}/api/vision/tag-images`,
@@ -249,6 +264,7 @@ class Search extends Component {
   };
 
   fetchQuote = async (urlParams) => {
+    // Save the quote
     console.log("url params", urlParams);
     fetch(`${config.REACT_APP_BASE_URL}/api/quote`, {
       mode: "cors",
@@ -265,7 +281,7 @@ class Search extends Component {
         });
 
         this.quotesCache[urlParams] = quote;
-        console.log("after fetch quote", quote, this.quotesCache);
+        console.log("After fetch quote", quote, this.quotesCache);
       });
   };
 
