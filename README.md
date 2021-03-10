@@ -28,7 +28,7 @@ The search screen provides you with several ways to search NASA's image reposito
   - Specify one or more NASA keywords
   - Specify one or more Google Vision labels
 
-![Alt text](./readme/SearchScreen.jpg?raw=true "SearchScreen"){width=656px}
+![Alt text](./readme/SearchScreen.jpg?raw=true "SearchScreen")
 
 After selection of a NASA keyword:
 
