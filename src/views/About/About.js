@@ -57,12 +57,12 @@ class About extends Component {
             >
               National Aeronautics and Space Administration (NASA)
             </a>{" "}
-            starting in 1958, when NASA was formed. NASA awarded Sagan for both
-            his scientific achievement and public service in educating the
-            citizenry. NASA has always tried to engage the public in its efforts
-            to collect data about the solar system and the universe, and about
-            the development of its sophisticated technology to enable the space
-            program. Indeed, NASA's pictures are{" "}
+            starting in 1958, when NASA was formed. NASA awarded Sagan medals
+            and awards for both his scientific achievement and public service in
+            educating the citizenry. NASA has always tried to engage the public
+            in its efforts to collect data about the solar system and the
+            universe, and about the development of its sophisticated technology
+            to enable the space program. Indeed, NASA's pictures are{" "}
             <a
               target="_blank"
               rel="noreferrer"
