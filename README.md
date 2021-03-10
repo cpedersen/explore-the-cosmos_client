@@ -30,6 +30,6 @@ Note that selecting keywords or labels will generate an entirely new search usin
 
 ## About Screen
 
-The About screen provides interesting details about Carl Sagan, NASA, and provides useful information on how to use the Explore the Cosmos application.
+The About screen provides interesting details about Carl Sagan and NASA. In addition, it provides useful information on how to use the Explore the Cosmos application.
 
 ![Alt text](./readme/AboutScreen.jpg?raw=true "AboutScreen")
