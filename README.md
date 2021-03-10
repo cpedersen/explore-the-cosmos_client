@@ -8,6 +8,10 @@ labels to each image, enabling the user to try
 searches they might not have thought of. Google labels do not guarantee
 a search result the way that NASA keywords do.
 
+## Live App
+
+https://explore-the-cosmos-client.vercel.app
+
 ## Welcome Screen
 
 The landing page provides you with a random Carl Sagan quote that you can update by reloading the page. Select the 'Search the Cosmos' button to get started. Or select the 'About' link in the top-right corner of the screen to learn more about the application.
