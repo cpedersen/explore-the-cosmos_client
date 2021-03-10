@@ -1,12 +1,11 @@
 # Explore the Cosmos Client
 
-The `Explore the Cosmos` application enables users to search NASA's vast repository of images using both NASA's public API and also
-the Google Vision API.
+The `Explore the Cosmos` application enables users to search NASA's vast repository of images using both NASA's public API and also the Google Vision API.
 
-The Google Vision API applies Google-generated
-labels to each image, enabling the user to try
-searches they might not have thought of. Google labels do not guarantee
-a search result the way that NASA keywords do.
+The Google Vision API applies Google-generated labels to each image, enabling the user to try
+searches they might not have thought of.
+
+In addition, a Carl Sagan quote is provided for every successful search.
 
 ## Live App
 
@@ -35,6 +34,8 @@ After selection of a NASA keyword:
 ![Alt text](./readme/KeywordSearch.jpg?raw=true "KeywordSearch")
 
 Note that selecting keywords or labels will generate an entirely new search using NASA's _keyword_ API option. Google Vision labels do not guarantee results in the same way that NASA-generated keywords do. The more keywords and tags you select, the less likely you will get a successful result.
+
+A new Carl Sagan quote is provided for every successful search.
 
 ## Item Description Screen
 
