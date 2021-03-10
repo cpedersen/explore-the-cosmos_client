@@ -102,7 +102,7 @@ class About extends Component {
             </a>{" "}
             are also provided to further inspire your searches, though Google
             labels do not guarantee a successful result in the same way that
-            NASA tags do. Note, too, that you may see a lag in displaying a
+            NASA keywords do. Note, too, that you may see a lag in displaying a
             quote, the Google labels, or in displaying additional pages, if you
             scroll up and down the screen. If that happens, wait one or two
             minutes for the API responses to catch up to your requests. When a
