@@ -27,3 +27,9 @@ The search screen provides you with several ways to search NASA's image reposito
 ![Alt text](./readme/SearchScreen.jpg?raw=true "SearchScreen")
 
 Note that selecting keywords or labels will generate an entirely new search using NASA's keyword API option. Google Vision labels do not guarantee results in the same way that NASA-generated keywords do. The more keywords and tags you select, the less likely you will get a successful result.
+
+## About Screen
+
+The About screen provides interesting details about Carl Sagan, NASA, and provides useful information on how to use the Explore the Cosmos application.
+
+![Alt text](./readme/AboutScreen.jpg?raw=true "AboutScreen")
