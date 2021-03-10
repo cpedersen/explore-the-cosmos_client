@@ -375,11 +375,11 @@ class Search extends Component {
         newSearch: false,
       });
     } finally {
-      console.log(
+      /*console.log(
         "in init search finally",
         this.state,
         this.state.searchInitialised
-      );
+      );*/
       if (this.state.searchInitialised) return;
       this.setState({
         searchInitialised: true,
