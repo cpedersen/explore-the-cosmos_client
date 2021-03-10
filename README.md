@@ -34,7 +34,7 @@ After selection of a NASA keyword:
 
 ![Alt text](./readme/KeywordSearch.jpg?raw=true "KeywordSearch")
 
-Note that selecting keywords or labels will generate an entirely new search using NASA's keyword API option. Google Vision labels do not guarantee results in the same way that NASA-generated keywords do. The more keywords and tags you select, the less likely you will get a successful result.
+Note that selecting keywords or labels will generate an entirely new search using NASA's _keyword_ API option. Google Vision labels do not guarantee results in the same way that NASA-generated keywords do. The more keywords and tags you select, the less likely you will get a successful result.
 
 ## Item Description Screen
 
