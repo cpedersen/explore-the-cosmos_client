@@ -11,11 +11,12 @@ https://explore-the-cosmos-client.vercel.app
 ## APIs & Database Used
 
 - NASA Images API (images.nasa.gov API): https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf
-  - q string
-  - keywords
-  - year_start
-  - year_end
+  - _q_ string
+  - _keywords_ option
+  - _year_start_ option
+  - _year_end_ option
 - Google Vision Detect Labels API: https://cloud.google.com/vision/docs/labels#vision_label_detection-nodejs
+  - API generates labels for each image
 - Heroku Database: https://dashboard.heroku.com/apps/stormy-citadel-96294
   - 100 Carl Sagan quotes
 
