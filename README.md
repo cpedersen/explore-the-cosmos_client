@@ -30,6 +30,8 @@ The search screen provides you with several ways to search NASA's image reposito
 
 ![Alt text](./readme/SearchScreen.jpg?raw=true "SearchScreen")
 
+After selection of a NASA keyword:
+
 ![Alt text](./readme/KeywordSearch.jpg?raw=true "KeywordSearch")
 
 Note that selecting keywords or labels will generate an entirely new search using NASA's keyword API option. Google Vision labels do not guarantee results in the same way that NASA-generated keywords do. The more keywords and tags you select, the less likely you will get a successful result.
