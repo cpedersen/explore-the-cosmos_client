@@ -149,7 +149,7 @@ class Search extends Component {
   persistQuotesCache = () => {
     // Quote should be persisted when a user selects an item to get the
     // description, then selects Go Back
-    console.log("Persisting quotes cache");
+    //console.log("Persisting quotes cache");
     window.localStorage.setItem(
       "quotesCache",
       JSON.stringify(this.quotesCache)
@@ -158,11 +158,11 @@ class Search extends Component {
 
   clearQuotesCache = () => {
     // Quote should be cleared when user selects Reset
-    console.log("Clearing quote");
+    //console.log("Clearing quote");
     this.setState({
       quote: "",
     });
-    console.log("quote: ", this.state.quote);
+    //console.log("quote: ", this.state.quote);
     window.localStorage.removeItem("quotesCache");
   };
 
@@ -273,7 +273,7 @@ class Search extends Component {
 
   fetchQuote = async (urlParams) => {
     // Fetch a random quote from the backend database
-    console.log("url params", urlParams);
+    //console.log("url params: ", urlParams);
     fetch(`${config.REACT_APP_BASE_URL}/api/quote`, {
       mode: "cors",
       headers: {

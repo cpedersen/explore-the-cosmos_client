@@ -100,13 +100,13 @@ class About extends Component {
             >
               Google Vision API labels
             </a>{" "}
-            are also provided to further inspire your searches (though Google
+            are also provided to further inspire your searches, though Google
             labels do not guarantee a successful result in the same way that
-            NASA tags do).{" "}
-            {/*(Note that the Google
-            labels and Prev/Next buttons in the footer may take a few moments to
-            load.)*/}{" "}
-            When a NASA keyword or Google label are selected, a new search is
+            NASA tags do. Note, too, that you may see a lag in displaying a
+            quote, the Google labels, or in displaying additional pages, if you
+            scroll up and down the screen. If that happens, wait one or two
+            minutes for the API responses to catch up to your requests. When a
+            NASA keyword or Google label are selected, a new search is
             performed, overwriting the previous search results.{" "}
             {/*(selecting the
             Submit button is not necessary when selecting keywords or labels)*/}
