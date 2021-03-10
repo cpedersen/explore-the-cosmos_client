@@ -8,34 +8,31 @@ import "./Search.css";
 import SpecificQuote from "../SpecificQuote/SpecificQuote";
 import "../SpecificQuote/SpecificQuote.css";
 
+// Set date range
 const START_DATE = 1920;
 const END_DATE = new Date().getFullYear();
 
 class Search extends Component {
   static contextType = SearchContext;
 
-  // start_date & end_date: start year & end year
-  // loading: true/false; waiting on NASA search return
-  // keywords: tags passed to NASA keywords query
   constructor() {
     super();
     this.state = {
-      start_date: START_DATE,
-      end_date: END_DATE,
-      error: null,
-      loading: false,
-      page: 1,
-      numOfPages: 1,
-      keywords: {},
-      searchInitialised: false,
-      didMount: false,
-      newSearch: false,
-      quote: "",
+      start_date: START_DATE /* Used for date picker */,
+      end_date: END_DATE /* Used for date picker */,
+      error: null /* Error if fetch failed */,
+      loading: false /* Indicates whether quotes/tags are being loaded */,
+      page: 1 /* Current page */,
+      numOfPages: 1 /* Provides page count */,
+      keywords: {} /* Track keywords/labels */,
+      searchInitialised: false /* Track whether search was cleared */,
+      didMount: false /* NOT USED: use for button to generate Random quotes */,
+      newSearch: false /* Time to display a new random quote */,
+      quote: "" /* Quote is cleared to start */,
     };
 
     // Save quote using localStorage
     const quotesCache = window.localStorage.getItem("quotesCache");
-
     if (quotesCache) {
       this.quotesCache = JSON.parse(quotesCache);
     } else {
@@ -44,29 +41,26 @@ class Search extends Component {
   }
 
   componentDidMount() {
+    //console.log("mounted: ", this.props);
+
     // Persist the quote when the component finishes rendering.
     window.addEventListener("beforeunload", this.persistQuotesCache);
-
-    //console.log("mounted: ", this.props);
 
     // Get the url
     const url = new URLSearchParams(this.props.location.search);
 
-    // Get the query that the user inputted; if no query
-    // found, the query is null
+    // Get the query that the user inputted; if no query found,
+    // the query is null
     const query = url.get("q") || "";
     //console.log("q: ", query);
 
-    // Get tags/keywords selected by user
-    const keywordsText = url.get("keywords: ") || "";
-
-    // FIX2_Part1 - Add persist of quote, if tags selected
+    // Get keywords/labels selected by user
+    const keywordsText = url.get("keywords") || "";
 
     //console.log("keywords text: ", keywordsText);
 
-    // If found, separate keywords using a pipe since pipe
+    // If found, separate keywords/labels using a pipe since pipe
     // works the same as a comma in a url search
-    // Set each keyword to true
     const keywords = keywordsText.length
       ? keywordsText.split("||").reduce((acc, keyword) => {
           acc[keyword] = true;
@@ -80,8 +74,8 @@ class Search extends Component {
     // default
     const page = parseInt(url.get("page")) || 1;
 
-    // Find the start_date from the url; if nothing found, then it's
-    // always the default; ditto for end_date
+    // Find the date from the url; if nothing found, then use
+    // the default
     const start_date = parseInt(url.get("year_start")) || START_DATE;
     const end_date = parseInt(url.get("year_end")) || END_DATE;
 
@@ -96,8 +90,24 @@ class Search extends Component {
       query === "" &&
       !keywordsText.length
     ) {
+      /*console.log(
+        "bail out; do not search",
+        start_date,
+        end_date,
+        page,
+        query,
+        keywordsText
+      );*/
       // Exit this function if default settings found
       //console.log("Default search settings found");
+      if (this.context.searchResults?.length) {
+        this.setState({
+          searchInitialised: true,
+        });
+        const keywordsText = this.prepareKeywordsUrlValue(this.state.keywords);
+        const urlParams = `?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&keywords=${keywordsText}&page=${page}`;
+        this.initQuote(urlParams);
+      }
       return;
     } else {
       // If we are using non-default settings, then continue
@@ -105,9 +115,8 @@ class Search extends Component {
     }
 
     // This setting is in case we want to generate random quotes
-    // every time the page is loaded (same as Homepage); for now
-    // this is unused
-    this.setState({ didMount: true });
+    // using a Random button; for now this is unused:
+    // this.setState({ didMount: true });
 
     // Default settings found, so we need to 1) pass to state an object
     // containing the state we need to update (page, start_date, end_date,
@@ -124,15 +133,16 @@ class Search extends Component {
       },
       () => {
         this.initSearch(page);
+        this.setState({
+          searchInitialised: true,
+        });
       }
     );
   }
 
   componentWillUnmount() {
     // Persist the quote before unmounting
-    // FIX2_Part4 - is this correct?
     window.removeEventListener("beforeunload", this.persistQuotesCache);
-    // Have to set this again to make sure we have the specific quote:
     this.persistQuotesCache();
   }
 
@@ -146,7 +156,6 @@ class Search extends Component {
     );
   };
 
-  //FIX1_Part1
   clearQuotesCache = () => {
     // Quote should be cleared when user selects Reset
     console.log("Clearing quote");
@@ -167,15 +176,13 @@ class Search extends Component {
 
   onTagClick = (tag) => {
     // Is the tag in keywords?
-    // If it is, set it to the opposite value
-    // Otherwise, set it to true
+    //     If it is, set it to the opposite value
+    //     Otherwise, set it to true
     const tagLower = tag; //.toLowerCase();
     let nextTagValue = true;
     this.setState({
       newSearch: true,
     });
-
-    // FIX2_Part3 - persist quote here?
 
     // Don't allow the user to add the same tag twice to the list of
     // keywords used in the query
@@ -192,6 +199,8 @@ class Search extends Component {
       [tagLower]: nextTagValue,
     };
 
+    // When the query has been cleared, make sure everything else is
+    // cleared: quote, page count, results count. Then scroll to top
     this.context.onQueryChange("");
     this.setState(
       {
@@ -201,7 +210,6 @@ class Search extends Component {
         this.initSearch(this.state.page);
       }
     );
-
     window.scrollTo(0, 0);
   };
 
@@ -264,7 +272,7 @@ class Search extends Component {
   };
 
   fetchQuote = async (urlParams) => {
-    // Save the quote
+    // Fetch a random quote from the backend database
     console.log("url params", urlParams);
     fetch(`${config.REACT_APP_BASE_URL}/api/quote`, {
       mode: "cors",
@@ -280,9 +288,21 @@ class Search extends Component {
           quote,
         });
 
+        // Save the quote to local storage
         this.quotesCache[urlParams] = quote;
-        console.log("After fetch quote", quote, this.quotesCache);
+        //console.log("After fetch quote: ", quote, this.quotesCache);
       });
+  };
+
+  initQuote = (urlParams) => {
+    // componentDidMount and initSearch need the quote
+    if (Object.prototype.hasOwnProperty.call(this.quotesCache, urlParams)) {
+      this.setState({
+        quote: this.quotesCache[urlParams],
+      });
+    } else {
+      this.fetchQuote(urlParams);
+    }
   };
 
   initSearch = async (page) => {
@@ -294,13 +314,7 @@ class Search extends Component {
     // the search available
     const keywordsText = this.prepareKeywordsUrlValue(this.state.keywords);
     const urlParams = `?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&keywords=${keywordsText}&page=${page}`;
-    if (Object.prototype.hasOwnProperty.call(this.quotesCache, urlParams)) {
-      this.setState({
-        quote: this.quotesCache[urlParams],
-      });
-    } else {
-      this.fetchQuote(urlParams);
-    }
+    this.initQuote(urlParams);
     const SEARCH_URL = `${config.NASA_API_ENDPOINT}${urlParams}`;
     this.props.history.push(`${this.props.match.path}${urlParams}`);
 
@@ -361,6 +375,11 @@ class Search extends Component {
         newSearch: false,
       });
     } finally {
+      console.log(
+        "in init search finally",
+        this.state,
+        this.state.searchInitialised
+      );
       if (this.state.searchInitialised) return;
       this.setState({
         searchInitialised: true,
@@ -429,7 +448,7 @@ class Search extends Component {
     this.context.setResults([]);
     // Clear url search params
     this.props.history.push("/search");
-    //FIX1_Part2
+    // Clear quote
     this.clearQuotesCache();
   };
 
