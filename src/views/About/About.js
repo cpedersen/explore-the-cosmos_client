@@ -90,9 +90,11 @@ class About extends Component {
             </a>
             . In this Explore the Cosmos tool, you can search almost 185,000
             NASA images using your own text or NASA keywords provided with the
-            NASA API. One hundred images are displayed per page of results. A
-            date range tool enables images to be displayed from as far back as
-            1920, when the field of aeronautics was in its infancy.{" "}
+            NASA API. Selecting navigation links from the Search page will
+            create new tabs to preserve your searches. One hundred images are
+            displayed per page of results. A date range tool enables images to
+            be displayed from as far back as 1920, when the field of aeronautics
+            was in its infancy.{" "}
             <a
               target="_blank"
               rel="noreferrer"

@@ -313,6 +313,7 @@ class Search extends Component {
 
     // Get the url search params, so that the user has the full path of
     // the search available
+
     const keywordsText = encodeURIComponent(
       this.prepareKeywordsUrlValue(this.state.keywords)
     );
