@@ -100,14 +100,15 @@ class Search extends Component {
       );*/
       // Exit this function if default settings found
       //console.log("Default search settings found");
-      if (this.context.searchResults?.length) {
+      /*if (this.context.searchResults?.length) {
         this.setState({
           searchInitialised: true,
         });
         const keywordsText = this.prepareKeywordsUrlValue(this.state.keywords);
         const urlParams = `?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&keywords=${keywordsText}&page=${page}`;
         this.initQuote(urlParams);
-      }
+      }*/
+      this.initSearch(page);
       return;
     } else {
       // If we are using non-default settings, then continue
@@ -312,7 +313,9 @@ class Search extends Component {
 
     // Get the url search params, so that the user has the full path of
     // the search available
-    const keywordsText = this.prepareKeywordsUrlValue(this.state.keywords);
+    const keywordsText = encodeURIComponent(
+      this.prepareKeywordsUrlValue(this.state.keywords)
+    );
     const urlParams = `?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&keywords=${keywordsText}&page=${page}`;
     this.initQuote(urlParams);
     const SEARCH_URL = `${config.NASA_API_ENDPOINT}${urlParams}`;
