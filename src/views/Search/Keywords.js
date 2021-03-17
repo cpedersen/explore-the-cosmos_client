@@ -29,7 +29,7 @@ const Keywords = (props) => {
       {activeKeywords.map((keyword) => {
         return (
           <div key={keyword}>
-            <span className="tag">{keyword}</span>
+            <span className="selected-tag">{keyword}</span>
             <span>
               <button
                 className="x-tag"

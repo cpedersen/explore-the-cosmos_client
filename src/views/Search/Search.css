@@ -152,6 +152,19 @@ label {
   color: black;
 }
 
+.selected-tag {
+  background: #a9a9a9;
+  color: white;
+
+  border: 1px solid black;
+  border-radius: 2%;
+  padding: 1%;
+  display: inline-block;
+  text-align: center;
+  margin: 0em;
+  font: 400 13.3333px Arial;
+}
+
 .x-tag {
   font-size: 10px;
   width: 16px;
