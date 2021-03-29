@@ -23,7 +23,7 @@ class Search extends Component {
       error: null /* Error if fetch failed */,
       loading: false /* Indicates whether quotes/tags are being loaded */,
       page: 1 /* Current page */,
-      numOfPages: 1 /* Provides page count */,
+      // numOfPages: 1 /* Provides page count */,
       keywords: {} /* Track keywords/labels */,
       searchInitialised: false /* Track whether search was cleared */,
       didMount: false /* NOT USED: use for button to generate Random quotes */,
@@ -81,7 +81,13 @@ class Search extends Component {
 
     // Pass the query to the onQueryChange function defined in App
     this.context.onQueryChange(query);
-
+    console.log({
+      start_date,
+      end_date,
+      page,
+      query,
+      keywordsText: !keywordsText.length,
+    });
     if (
       // Check if we're using default settings to begin with
       start_date === START_DATE &&
@@ -90,14 +96,14 @@ class Search extends Component {
       query === "" &&
       !keywordsText.length
     ) {
-      /*console.log(
+      console.log(
         "bail out; do not search",
         start_date,
         end_date,
         page,
         query,
         keywordsText
-      );*/
+      );
       // Exit this function if default settings found
       //console.log("Default search settings found");
       /*if (this.context.searchResults?.length) {
@@ -108,9 +114,24 @@ class Search extends Component {
         const urlParams = `?q=${this.context.query}&media_type=image&year_start=${this.state.start_date}&year_end=${this.state.end_date}&keywords=${keywordsText}&page=${page}`;
         this.initQuote(urlParams);
       }*/
-      this.initSearch(page);
+      // this.initSearch(page);
       return;
     } else {
+      console.log("search?");
+      this.setState(
+        {
+          page,
+          start_date,
+          end_date,
+          keywords,
+        },
+        () => {
+          this.initSearch(page);
+          this.setState({
+            searchInitialised: true,
+          });
+        }
+      );
       // If we are using non-default settings, then continue
       //console.log("User-provided search settings found");
     }
@@ -125,20 +146,6 @@ class Search extends Component {
     // initialize search parameters needed for pagination and for clearing
     // the date settings; the callback function initSearch is executed once
     // setState is completed and the component is re-rendered
-    this.setState(
-      {
-        page,
-        start_date,
-        end_date,
-        keywords,
-      },
-      () => {
-        this.initSearch(page);
-        this.setState({
-          searchInitialised: true,
-        });
-      }
-    );
   }
 
   componentWillUnmount() {
@@ -365,11 +372,12 @@ class Search extends Component {
       this.context.onSearchResults({
         results: result.collection.items,
         total_hits: result.collection.metadata.total_hits,
+        numOfPages: this.getPageCount(result.collection.metadata.total_hits),
       });
 
       this.setState({
         loading: false,
-        numOfPages: this.getPageCount(this.context.total_hits),
+        // numOfPages: this.getPageCount(this.context.total_hits),
       });
     } catch (error) {
       console.error("error: ", error);
@@ -439,7 +447,7 @@ class Search extends Component {
     // Go back to default settings
     this.setState({
       page: 1,
-      numOfPages: 1,
+      // numOfPages: 1,
       start_date: START_DATE,
       end_date: END_DATE,
       keywords: {},
@@ -450,6 +458,7 @@ class Search extends Component {
     this.context.onQueryChange("");
     // Clear results displayed on the Search page
     this.context.setResults([]);
+    this.context.resetNumPages();
     // Clear url search params
     this.props.history.push("/search");
     // Clear quote
@@ -614,10 +623,10 @@ class Search extends Component {
                 <span></span>
               )}
               <span className="page-num">
-                {this.state.page} of {this.state.numOfPages}
+                {this.state.page} of {this.context.numOfPages}
               </span>
 
-              {this.state.page !== this.state.numOfPages ? (
+              {this.state.page !== this.context.numOfPages ? (
                 <button className="footer-nav-button" onClick={this.onNextPage}>
                   Next
                 </button>

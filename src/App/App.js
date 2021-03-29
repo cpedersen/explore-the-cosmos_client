@@ -16,12 +16,14 @@ class App extends Component {
     searchResults: [],
     total_hits: 0,
     quote: "",
+    numOfPages: 1,
   };
 
-  onSearchResults = ({ results, total_hits }) => {
+  onSearchResults = ({ results, total_hits, numOfPages }) => {
     this.setState({
       searchResults: results,
       total_hits,
+      numOfPages,
     });
   };
 
@@ -37,11 +39,17 @@ class App extends Component {
     });
   };
 
+  resetNumPages = () => {
+    this.setState({
+      numOfPages: 1,
+    });
+  };
+
   render() {
     //console.log("this in app", this);
 
-    const { query, searchResults, total_hits, quote } = this.state;
-    const { onSearchResults, onQueryChange, setResults } = this;
+    const { query, searchResults, total_hits, quote, numOfPages } = this.state;
+    const { onSearchResults, onQueryChange, setResults, resetNumPages } = this;
 
     const contextValue = {
       query,
@@ -51,6 +59,8 @@ class App extends Component {
       onQueryChange,
       setResults,
       quote,
+      numOfPages,
+      resetNumPages,
     };
 
     return (
